@@ -8,7 +8,6 @@ Una pequeña start-up comienza un ambicioso proyecto para crear un market-place
 tecnológico. Desde negocio quieren tener un pequeño piloto en producción lo antes posible. Esta primera versión tendrá 
 funcionalidades reducidas que irán creciendo durante mucho tiempo.
 
-
 Desde el departamento técnico se ponen las expectativas más altas para el producto.
 El requisito principal es realizar un proyecto altamente tolerable al cambio.
 Los objetivos de la prueba técnica son:
