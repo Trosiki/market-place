@@ -3,7 +3,7 @@
 class ShoppingCart
 {
     private int $id;
-    private [] $products;
+    private array $products;
     private CartStatus $cartStatus;
     private User $user;
 
