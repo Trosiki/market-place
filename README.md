@@ -37,7 +37,7 @@ de este momento..
 
 
 ### Esquema E-R
-![Diagrama relacional](/doc_images/e-r.png)
+![Diagrama relacional](./doc_images/e-r.png)
 A través de la herramienta MIRO se ha realizado un pequeño esquema relacional que permita al funcionamiento básico de 
 la web con funcionalidades reducidas.
 
