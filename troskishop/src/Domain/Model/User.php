@@ -1,4 +1,5 @@
 <?php
+namespace App\Domain\Model;
 
 class User
 {
@@ -94,6 +95,5 @@ class User
     {
         $this->role = $role;
     }
-
 
 }

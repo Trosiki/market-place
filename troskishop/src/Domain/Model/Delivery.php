@@ -1,4 +1,5 @@
-5<?php
+<?php
+namespace App\Domain\Model;
 
 class Delivery
 {

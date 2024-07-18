@@ -1,4 +1,5 @@
 <?php
+namespace App\Domain\Model;
 
 class Product
 {
@@ -8,6 +9,8 @@ class Product
     private float $price;
     private string $image;
     private string $specification;
+
+    private string $category;
 
     public function __construct()
     {
@@ -73,4 +76,13 @@ class Product
         $this->specification = $specification;
     }
 
+    public function getCategory(): string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): void
+    {
+        $this->category = $category;
+    }
 }
