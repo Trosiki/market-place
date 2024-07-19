@@ -1,5 +1,5 @@
 <?php
-namespace App\Domain\Model;
+namespace TroskiShop\Domain\Model;
 
 class User
 {
@@ -11,6 +11,7 @@ class User
     private string $password;
     private string $telephone;
     private string $role;
+    private array $shoppingCarts;
 
     public function __construct()
     {
@@ -94,6 +95,16 @@ class User
     public function setRole(string $role): void
     {
         $this->role = $role;
+    }
+
+    public function getShoppingCarts(): array
+    {
+        return $this->shoppingCarts;
+    }
+
+    public function setShoppingCarts(array $shoppingCarts): void
+    {
+        $this->shoppingCarts = $shoppingCarts;
     }
 
 }

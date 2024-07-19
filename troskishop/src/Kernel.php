@@ -14,7 +14,7 @@ class Kernel extends BaseKernel
     {
         $routes->import('../config/{routes}/' . $this->environment . '/*.yaml');
         $routes->import('../config/{routes}/*.yaml');
-        $routes->import('../src/UI/Controller/', 'annotation');
+        $routes->import('../src/TroskiShop/UI/Controller/', 'annotation');
         $routes->import('../config/{routes}.yaml');
     }
 }

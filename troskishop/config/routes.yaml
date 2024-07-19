@@ -1,5 +1,5 @@
 controllers:
     resource:
-        path: ../src/UI/Controller/
-        namespace: App\UI\Controller
+        path: ../src/TroskiShop/UI/Controller/
+        namespace: TroskiShop\UI\Controller
     type: attribute

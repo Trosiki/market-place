@@ -1,5 +1,5 @@
 <?php
-namespace App\Domain\Model;
+namespace TroskiShop\Domain\Model;
 
 class OrderAddress
 {

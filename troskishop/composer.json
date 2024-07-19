@@ -55,7 +55,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "TroskiShop\\": "src/TroskiShop"
         }
     },
     "autoload-dev": {
