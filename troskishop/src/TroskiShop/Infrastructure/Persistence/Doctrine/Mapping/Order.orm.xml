@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="TroskiShop\Domain\Model\Order" table="ORDER">
+        <id name="id" type="string" column="id"/>
+        <field name="shoppingCartId" type="integer" column="shopping_cart_id"/>
+        <field name="deliveryId" type="integer" column="delivery_id"/>
+        <field name="createdAt" type="datetime" column="created_at"/>
+        <field name="sendingDate" type="datetime" column="sending_date"/>
+        <field name="deliveryDate" type="datetime" column="delivery_date"/>
+        <field name="deliveredDate" type="datetime" column="delivered_date"/>
+
+        <embedded name="address" class="TroskiShop\Domain\Model\OrderAddress"/>
+    </entity>
+</doctrine-mapping>

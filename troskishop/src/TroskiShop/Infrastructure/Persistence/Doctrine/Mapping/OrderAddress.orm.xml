@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <embeddable name="TroskiShop\Domain\Model\OrderAddress">
+        <field name="country" column="address_country"/>
+        <field name="city" column="address_city"/>
+        <field name="location" column="address_location"/>
+        <field name="street" column="address_street"/>
+        <field name="number" column="address_number"/>
+        <field name="stair" column="address_stair"/>
+        <field name="floorNumber" column="address_floor_number"/>
+        <field name="door" column="address_door"/>
+        <field name="postalCode" column="address_postal_code"/>
+        <field name="phoneContact" column="address_phone_contact"/>
+    </embeddable>
+</doctrine-mapping>
