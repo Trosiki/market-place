@@ -1,0 +1,21 @@
+easy_admin:
+  site_name: 'TroskiShop Backoffice'
+  entities:
+      Product:
+        class: TroskiShop\Domain\Model\Product
+        list:
+          fields: ['id','name','price']
+        form:
+          fields: [ 'name', 'description', 'price', 'image', 'specification' ]
+      Order:
+        class: TroskiShop\Domain\Model\Order
+        list:
+          fields: [ 'id', 'shoppingCartId', 'createdAt', 'deliveryDate' ]
+        form:
+          fields: [ 'shoppingCartId', 'deliveryId', 'createdAt', 'sendingDate', 'deliveryDate', 'deliveredDate', 'address' ]
+      User:
+        class: TroskiShop\Domain\Model\User
+        list:
+          fields: ['id', 'nif', 'name', 'surname', 'email']
+  design:
+    form_theme: 'horizontal'
