@@ -16,10 +16,15 @@ services:
     TroskiShop\:
         resource: '../src/TroskiShop/*'
         exclude:
-            - '../src/DependencyInjection/{Entity,Migrations,Test,Kernel.php}'
+            - '../src/DependencyInjection/{Entity,Migrations,Test}'
 
     TroskiShop\Infrastructure\Framework\Symfony\:
         resource: '../src/TroskiShop/Infrastructure/Framework/Symfony/*'
         exclude: '../src/TroskiShop/Infrastructure/Framework/Symfony/{Entity,Migrations,Tests}'
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+
+    TroskiShop\Infrastructure\Framework\Symfony\Controller\:
+        resource: '../src/TroskiShop/Infrastructure/Framework/Symfony/Controller/*'
+        public: true
+        autowire: true
+        autoconfigure: true
+

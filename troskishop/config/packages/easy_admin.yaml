@@ -18,4 +18,8 @@ easy_admin:
         list:
           fields: ['id', 'nif', 'name', 'surname', 'email']
   design:
-    form_theme: 'horizontal'
+    form_theme: '@EasyAdmin/crud/form_theme.html.twig'
+    menu:
+      - {route: 'backoffice', label: 'Dashboard', icon: 'fa fa-home'}
+  dashboard:
+    controller: TroskiShop\Infrastructure\Framework\Symfony\Controller\Backoffice\BackofficeController

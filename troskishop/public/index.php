@@ -1,6 +1,6 @@
 <?php
 
-use App\TroskiShop\Infrastructure\Framework\Symfony\Kernel;
+use TroskiShop\Infrastructure\Framework\Symfony\Kernel;
 
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
