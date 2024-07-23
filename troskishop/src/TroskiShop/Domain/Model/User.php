@@ -1,6 +1,9 @@
 <?php
 namespace TroskiShop\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 class User
 {
     private int $id;
@@ -11,10 +14,11 @@ class User
     private string $password;
     private string $telephone;
     private string $role;
-    private array $shoppingCarts;
+    private Collection $shoppingCarts;
 
     public function __construct()
     {
+        $this->shoppingCarts = new ArrayCollection();
     }
 
     public function getId(): int
@@ -97,12 +101,12 @@ class User
         $this->role = $role;
     }
 
-    public function getShoppingCarts(): array
+    public function getShoppingCarts(): Collection
     {
         return $this->shoppingCarts;
     }
 
-    public function setShoppingCarts(array $shoppingCarts): void
+    public function setShoppingCarts(ArrayCollection $shoppingCarts): void
     {
         $this->shoppingCarts = $shoppingCarts;
     }

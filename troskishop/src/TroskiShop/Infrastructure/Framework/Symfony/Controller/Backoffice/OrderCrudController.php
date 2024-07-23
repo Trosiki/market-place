@@ -4,9 +4,6 @@ namespace TroskiShop\Infrastructure\Framework\Symfony\Controller\Backoffice;
 
 use TroskiShop\Domain\Model\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class OrderCrudController extends AbstractCrudController
 {

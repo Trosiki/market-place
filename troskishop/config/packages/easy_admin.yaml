@@ -10,9 +10,7 @@ easy_admin:
       Order:
         class: TroskiShop\Domain\Model\Order
         list:
-          fields: [ 'id', 'shoppingCartId', 'createdAt', 'deliveryDate' ]
-        form:
-          fields: [ 'shoppingCartId', 'deliveryId', 'createdAt', 'sendingDate', 'deliveryDate', 'deliveredDate', 'address' ]
+          fields: [ 'id', 'shoppingCartId', 'address' ,'createdAt', 'sendingDate', 'deliveryDate', 'deliveredDate' ]
       User:
         class: TroskiShop\Domain\Model\User
         list:

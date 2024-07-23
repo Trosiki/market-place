@@ -138,6 +138,7 @@
       <excludeFolder url="file://$MODULE_DIR$/troskishop/vendor/twig/extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/troskishop/vendor/twig/twig" />
       <excludeFolder url="file://$MODULE_DIR$/troskishop/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/troskishop/vendor/symfony/webpack-encore-bundle" />
     </content>
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />

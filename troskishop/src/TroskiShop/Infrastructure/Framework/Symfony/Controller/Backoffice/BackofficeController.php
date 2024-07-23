@@ -9,7 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use TroskiShop\Domain\Model\Order;
 use TroskiShop\Domain\Model\Product;
+use TroskiShop\Domain\Model\User;
 
 class BackofficeController extends AbstractDashboardController
 {
@@ -117,8 +119,8 @@ class BackofficeController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Product', 'fa fa-home', Product::class);
-        yield MenuItem::linkToCrud('Order', 'fa fa-home', Product::class);
-        yield MenuItem::linkToCrud('User', 'fa fa-user', Product::class);
+        yield MenuItem::linkToCrud('Order', 'fa fa-home', Order::class);
+        yield MenuItem::linkToCrud('User', 'fa fa-user', User::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
