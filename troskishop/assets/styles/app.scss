@@ -1,1 +1,27 @@
 @import "../../node_modules/bootstrap";
+
+/* Custom styles for the sidebar */
+.sidebar {
+  position: relative;
+  width: 250px; /* Adjust width as needed */
+  padding: 2rem;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 1rem; /* Space around the sidebar */
+  border-radius: 8px;
+}
+
+.main-content {
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+  .main-content {
+    margin-left: 0;
+  }
+}

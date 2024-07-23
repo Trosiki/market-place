@@ -16,6 +16,21 @@
     </head>
     <body>
         {% include 'web_structure/header.html.twig' %}
+        <div class="container-fluid d-flex">
+            {% include 'web_structure/sidebar.html.twig' %}
+
+            <div class="col">
+                <main class="main-content">
+                    <!-- Add your product listings or main content here -->
+                    <div class="container">
+                        <h2>Productos</h2>
+                        <!-- Example product listings -->
+                    </div>
+                </main>
+            </div>
+        </div>
+
+
         {% block body %}{% endblock %}
         {% include 'web_structure/footer.html.twig' %}
         <!-- FontAwesome for icons -->
