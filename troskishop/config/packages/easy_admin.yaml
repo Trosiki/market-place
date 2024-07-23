@@ -1,0 +1,23 @@
+easy_admin:
+  site_name: 'TroskiShop Backoffice'
+  entities:
+      Product:
+        class: TroskiShop\Domain\Model\Product
+        list:
+          fields: ['id','name','price']
+        form:
+          fields: [ 'name', 'description', 'price', 'image', 'specification' ]
+      Order:
+        class: TroskiShop\Domain\Model\Order
+        list:
+          fields: [ 'id', 'shoppingCartId', 'address' ,'createdAt', 'sendingDate', 'deliveryDate', 'deliveredDate' ]
+      User:
+        class: TroskiShop\Domain\Model\User
+        list:
+          fields: ['id', 'nif', 'name', 'surname', 'email']
+  design:
+    form_theme: '@EasyAdmin/crud/form_theme.html.twig'
+    menu:
+      - {route: 'backoffice', label: 'Dashboard', icon: 'fa fa-home'}
+  dashboard:
+    controller: TroskiShop\Infrastructure\Framework\Symfony\Controller\Backoffice\BackofficeController
