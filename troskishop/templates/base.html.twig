@@ -15,7 +15,9 @@
     <body>
         {% include 'web_structure/header.html.twig' %}
         <div class="container-fluid p-3-8 d-flex">
+            {% if active_filters %}
             {% include 'web_structure/sidebar.html.twig' %}
+            {% endif %}
             <div class="col">
                 <main class="main-content">
                     {% block content %}
