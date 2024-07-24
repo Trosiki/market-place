@@ -13,16 +13,16 @@
                 </form>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Todos los Productos</a>
+                        <a class="nav-link {% if active_page == "all-catalog" %} active {% endif %}" href="#">Todos los Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Portátiles</a>
+                        <a class="nav-link {% if active_page == "laptop-catalog" %} active {% endif %}" href="#">Portátiles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sobremesa</a>
+                        <a class="nav-link {% if active_page == "desktop-catalog" %} active {% endif %}" href="#">Sobremesa</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item  dropdown">
+                        <a class="nav-link dropdown-toggle {% if active_page == "peripheral-catalog" %} active {% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Periféricos
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -42,11 +42,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-shopping-cart"></i>
-                            <span class="badge bg-warning text-dark ms-1">3</span>
+                            <span class="badge bg-warning text-dark ms-1">0</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartDropdown">
                             <li><a class="dropdown-item" href="#">Carrito vacío</a></li>
-                            <!-- Add more items here as needed -->
                         </ul>
                     </li>
                 </ul>

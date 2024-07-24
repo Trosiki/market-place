@@ -7,8 +7,6 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXOU3QNl+q30b+/07Nf1J0HavQrFnYdQ5oKz6F+vZkKH1W+kn4TC6aQxT5xJk6k4dY5swXQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -16,21 +14,15 @@
     </head>
     <body>
         {% include 'web_structure/header.html.twig' %}
-        <div class="container-fluid d-flex">
+        <div class="container-fluid p-3-8 d-flex">
             {% include 'web_structure/sidebar.html.twig' %}
-
             <div class="col">
                 <main class="main-content">
-                    <!-- Add your product listings or main content here -->
-                    <div class="container">
-                        <h2>Productos</h2>
-                        <!-- Example product listings -->
-                    </div>
+                    {% block content %}
+                    {% endblock content %}
                 </main>
             </div>
         </div>
-
-
         {% block body %}{% endblock %}
         {% include 'web_structure/footer.html.twig' %}
         <!-- FontAwesome for icons -->

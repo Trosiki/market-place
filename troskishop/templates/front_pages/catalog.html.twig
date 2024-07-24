@@ -1,0 +1,9 @@
+{% set active_page = 'all-catalog' %}
+{% extends 'base.html.twig' %}
+{% block content %}
+<div class="container-fluid">
+    <h2>Todos los productos</h2>
+    <hr>
+    {% include 'front_pages/products/products-list.html.twig' with {products: products} %}
+</div>
+{% endblock %}
