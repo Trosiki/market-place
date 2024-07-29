@@ -7,8 +7,6 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXOU3QNl+q30b+/07Nf1J0HavQrFnYdQ5oKz6F+vZkKH1W+kn4TC6aQxT5xJk6k4dY5swXQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -16,7 +14,19 @@
     </head>
     <body>
         {% include 'web_structure/header.html.twig' %}
-        {% block body %}{% endblock %}
+        {% block body %}
+            <div class="container-fluid p-3-8 d-flex">
+                {% if active_filters %}
+                {% include 'web_structure/sidebar.html.twig' %}
+                {% endif %}
+                <div class="col">
+                    <main class="main-content">
+                        {% block content %}
+                        {% endblock content %}
+                    </main>
+                </div>
+            </div>
+        {% endblock %}
         {% include 'web_structure/footer.html.twig' %}
         <!-- FontAwesome for icons -->
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

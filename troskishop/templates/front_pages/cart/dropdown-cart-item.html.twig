@@ -1,0 +1,20 @@
+{% if shoppingCartProducts is defined and shoppingCartProducts | length > 0 %}
+    {% for shoppingCartProduct in shoppingCartProducts %}
+        <li>
+            <div class="cart-preview-item">
+                <img src="{{ asset(shoppingCartProduct.product.image) }}" alt="Producto 1">
+                <div class="cart-preview-item-details">
+                    <h6>{{ shoppingCartProduct.product.name }}</h6>
+                    <p class="cart-preview-item-price">{{ shoppingCartProduct.quantity }}x {{shoppingCartProduct.product.price}}€= <strong>{{ shoppingCartProduct.totalPrice }} €</strong></p>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+    <li>
+        <div class="dropdown-footer">
+            <a class="btn btn-view-cart" href="{{ path('cart') }}">Ver Carrito <i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </li>
+{% else %}
+    <li><a class="dropdown-item" href="#">Carrito vacío</a></li>
+{% endif %}

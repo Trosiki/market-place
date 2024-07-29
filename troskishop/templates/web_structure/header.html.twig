@@ -13,16 +13,16 @@
                 </form>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Todos los Productos</a>
+                        <a class="nav-link {% if active_page == "all-catalog" %} active {% endif %}" href="#">Todos los Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Portátiles</a>
+                        <a class="nav-link {% if active_page == "laptop-catalog" %} active {% endif %}" href="#">Portátiles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sobremesa</a>
+                        <a class="nav-link {% if active_page == "desktop-catalog" %} active {% endif %}" href="#">Sobremesa</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item  dropdown">
+                        <a class="nav-link dropdown-toggle {% if active_page == "peripheral-catalog" %} active {% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Periféricos
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -30,6 +30,21 @@
                             <li><a class="dropdown-item" href="#">Teclados</a></li>
                             <li><a class="dropdown-item" href="#">Monitores</a></li>
                         </ul>
+
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge bg-warning text-dark ms-1">{% if shoppingCartProducts is defined  %}{{ shoppingCartProducts|length }}{% else %}0{% endif %}</span>
+                        </a>
+                        {% include 'front_pages/cart/dropdown-cart.html.twig' %}
                     </li>
                 </ul>
             </div>

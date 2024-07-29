@@ -1,0 +1,6 @@
+<div class="d-flex flex-wrap">
+
+    {% for product in products %}
+        {% include 'front_pages/products/card-product.html.twig' with {product: product} %}
+    {% endfor %}
+</div>

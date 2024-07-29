@@ -1,0 +1,47 @@
+{% set active_page = 'all-catalog' %}
+{% set active_filters = false %}
+{% extends 'base.html.twig' %}
+{% block content %}
+<div class="product-detail row">
+    <div class="col-md-6">
+        <div class="product-image">
+            <img src="{{ asset('image/ejemplo.png') }}" class="img-fluid" alt="Product Image">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h1 class="product-title">Nombre del Producto</h1>
+        <p class="product-price">€29.99</p>
+        <p class="product-description">
+            Este es un producto increíble con características destacadas. Perfecto para tus necesidades diarias. Con una calidad excepcional y un diseño elegante, ¡no puedes dejar pasar esta oportunidad!
+        </p>
+        <div class="product-specs">
+            <div class="spec-item">
+                <span>Marca:</span>
+                <span>Marca Ejemplo</span>
+            </div>
+            <div class="spec-item">
+                <span>Modelo:</span>
+                <span>Modelo123</span>
+            </div>
+            <div class="spec-item">
+                <span>Color:</span>
+                <span>Negro</span>
+            </div>
+            <div class="spec-item">
+                <span>Dimensiones:</span>
+                <span>25x20x15 cm</span>
+            </div>
+            <div class="spec-item">
+                <span>Peso:</span>
+                <span>1.5 kg</span>
+            </div>
+        </div>
+        <button class="btn btn-add-to-cart mt-4">Agregar al carrito <i class="fas fa-cart-plus"></i></button>
+    </div>
+    <div class="col-md-12">
+        <div class="product-specification">
+            {{ product.specification | default('') }}
+        </div>
+    </div>
+</div>
+{% endblock %}
