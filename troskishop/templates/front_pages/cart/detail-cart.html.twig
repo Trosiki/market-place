@@ -1,0 +1,18 @@
+{% set active_page = "cart" %}
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="cart-container mb-5">
+        <h1 class="cart-header">Carrito de Compras</h1>
+
+        {% for shoppingCartProduct in shoppingCartProducts %}
+            {% include 'front_pages/cart/cart-item.html.twig' with {shoppingCartProduct: shoppingCartProduct} %}
+        {% endfor %}
+
+        <div class="cart-total">
+            Total: {{ totalPrice }}€
+        </div>
+        <button class="btn btn-checkout mt-4">Proceder al Pago <i class="fas fa-credit-card"></i></button>
+    </div>
+</div>
+{% endblock body %}

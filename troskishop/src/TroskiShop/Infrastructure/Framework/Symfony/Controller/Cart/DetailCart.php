@@ -1,6 +1,6 @@
 <?php
 
-namespace TroskiShop\Infrastructure\Framework\Symfony\Controller;
+namespace TroskiShop\Infrastructure\Framework\Symfony\Controller\Cart;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -8,22 +8,11 @@ use Symfony\Component\Routing\Attribute\Route;
 use TroskiShop\Domain\Model\Product;
 use TroskiShop\Domain\Model\ShoppingCartProduct;
 
-class HomeController extends AbstractController
+class DetailCart extends AbstractController
 {
-    #[Route('/', name: 'homepage')]
-    public function indexAction(): Response
+    #[Route(path: '/cart', name: 'cart', methods: ['GET'])]
+    public function detail(Product $product): Response
     {
-        $products = [];
-        for($i = 0; $i < 20; $i++) {
-            $product = new Product();
-            $product->setName("Nombre ejemplo " . $i);
-            $product->setCategory("Categoria");
-            $product->setDescription("Una descripción algo breve pero a la vez algo larga para ver como queda esta vaina, porque me resulta interesante ver cómo encaja con mucho texto.");
-            $product->setImage('image/ejemplo.png');
-            $product->setPrice(rand(0,1000));
-            $products[] = $product;
-        }
-
         $shoppingCartProducts = [];
         $totalPrice = 0;
         for($i = 0; $i < 3; $i++) {
@@ -42,11 +31,9 @@ class HomeController extends AbstractController
             $totalPrice += $product->getPrice();
         }
 
-        return $this->render('front_pages/catalog.html.twig', [
-            "products" => $products,
-            "shoppingCartProducts" => $shoppingCartProducts,
-            "totalPrice" => $totalPrice
+        return $this->render('/front_pages/cart/detail-cart.html.twig', [
+            'shoppingCartProducts' => $shoppingCartProducts,
+            'totalPrice' => $totalPrice,
         ]);
     }
-
 }

@@ -42,11 +42,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-shopping-cart"></i>
-                            <span class="badge bg-warning text-dark ms-1">0</span>
+                            <span class="badge bg-warning text-dark ms-1">{% if shoppingCartProducts is defined  %}{{ shoppingCartProducts|length }}{% else %}0{% endif %}</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartDropdown">
-                            <li><a class="dropdown-item" href="#">Carrito vacío</a></li>
-                        </ul>
+                        {% include 'front_pages/cart/dropdown-cart.html.twig' %}
                     </li>
                 </ul>
             </div>
