@@ -4,6 +4,7 @@ namespace TroskiShop\Domain\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use TroskiShop\Application\DTOs\User\RegisterUserFormDto;
+use TroskiShop\Infrastructure\Framework\Symfony\Security\SecurityUser;
 
 class User
 {
@@ -15,9 +16,9 @@ class User
     private ?string $password;
     private ?string $telephone;
     private array $roles;
-    private ?array $shoppingCarts;
+    private ?Collection $shoppingCarts;
 
-    public function __construct(?string $nif = null, ?string $name = null, ?string $surname = null, ?string $telephone = null, ?string $email = null, ?string $password = null, array $roles = ['ROLE_USER'] )
+    public function __construct(?string $nif = null, ?string $name = null, ?string $surname = null, ?string $telephone = null, ?string $email = null, ?string $password = null, array $roles = [SecurityUser::ROLE_USER] )
     {
         $this->nif = $nif;
         $this->name = $name;
@@ -26,7 +27,7 @@ class User
         $this->email = $email;
         $this->password = $password;
         $this->roles = $roles;
-        $this->shoppingCarts = [];
+        $this->shoppingCarts = new ArrayCollection();
     }
 
     public static function createFromRegisterUserForm(RegisterUserFormDto $registerUserFormDto): User
@@ -36,8 +37,7 @@ class User
             $registerUserFormDto->getFirstName(),
             $registerUserFormDto->getLastName(),
             $registerUserFormDto->getTelephone(),
-            $registerUserFormDto->getEmail(),
-            $registerUserFormDto->getPassword(),
+            $registerUserFormDto->getEmail()
         );
     }
 
@@ -111,22 +111,24 @@ class User
         $this->telephone = $telephone;
     }
 
-    public function getRoles(): string
+    public function getRoles(): array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
     }
 
-    public function setRoles(string $roles): void
+    public function setRoles(array $roles): void
     {
         $this->roles = $roles;
     }
 
-    public function getShoppingCarts(): array
+    public function getShoppingCarts(): Collection
     {
         return $this->shoppingCarts;
     }
 
-    public function setShoppingCarts(array $shoppingCarts): void
+    public function setShoppingCarts(Collection $shoppingCarts): void
     {
         $this->shoppingCarts = $shoppingCarts;
     }
