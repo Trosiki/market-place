@@ -25,7 +25,6 @@ class RegisterNewUser
     {
         $this->validateRegisterUserForm($registerUserFormDto);
         $user = $this->createUserWithPasswordHashed($registerUserFormDto);
-//        var_dump($user);die;
         $this->userRepository->save($user, true);
     }
 
