@@ -2,7 +2,7 @@
 <header class="bg-dark text-white">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="#">TroskiShop</a>
+            <a class="navbar-brand" href="{{ path('homepage') }}">TroskiShop</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -13,7 +13,7 @@
                 </form>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {% if active_page == "all-catalog" %} active {% endif %}" href="#">Todos los Productos</a>
+                        <a class="nav-link {% if active_page == "all-catalog" %} active {% endif %}" href="{{ path('homepage') }}">Todos los Productos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if active_page == "laptop-catalog" %} active {% endif %}" href="#">Portátiles</a>
@@ -34,11 +34,23 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-3">
+                    {% if app.user %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="userMenuDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                <i class="fas fa-user"></i> {{ app.user.appUser.name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuDropdown">
+                                <li><a class="dropdown-item" href="#">Mis pedidos</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_logout') }}">Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ path('app_login') }}">
                             <i class="fas fa-user"></i> Login
                         </a>
                     </li>
+                    {% endif %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-shopping-cart"></i>

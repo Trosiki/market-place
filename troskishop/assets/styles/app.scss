@@ -295,3 +295,41 @@ body {
 .btn-view-cart:hover {
   background-color: #218838;
 }
+
+.card-login {
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #343a40;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px 20px 0 0;
+}
+
+.form-control:focus {
+  border-color: #495057;
+  box-shadow: none;
+}
+
+.btn-custom {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 20px;
+}
+
+.btn-custom:hover {
+  background-color: #0056b3;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.form-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 0 0 20px 20px;
+}

@@ -14,6 +14,6 @@
         <field name="email" type="string" column="email" length="100"/>
         <field name="password" type="string" column="password" length="255"/>
         <field name="telephone" type="string" column="telephone" length="20"/>
-        <field name="role" type="string" column="role" length="50"/>
+        <field name="roles" type="json" column="roles" length="200"/>
         <one-to-many field="shoppingCarts" target-entity="ShoppingCart" mapped-by="user" />
     </entity></doctrine-mapping>
