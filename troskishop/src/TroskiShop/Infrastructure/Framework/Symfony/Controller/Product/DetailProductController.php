@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use TroskiShop\Domain\Model\Product;
 
-class DetailProduct extends AbstractController
+class DetailProductController extends AbstractController
 {
     #[Route(path: '/detail', name: 'detail_product', methods: ['GET'])]
     public function detail(Product $product): Response

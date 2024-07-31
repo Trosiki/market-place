@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use TroskiShop\Domain\Model\Product;
 use TroskiShop\Domain\Model\ShoppingCartProduct;
 
-class DetailCart extends AbstractController
+class DetailCartController extends AbstractController
 {
     #[Route(path: '/cart', name: 'cart', methods: ['GET'])]
     public function detail(Product $product): Response

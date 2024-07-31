@@ -5,9 +5,9 @@ namespace TroskiShop\Application\Services\User;
 use TroskiShop\Application\DTOs\User\RegisterUserFormDto;
 use TroskiShop\Application\Exceptions\EmailIsAlreadyInUse;
 use TroskiShop\Application\Exceptions\PasswordNonEqualsThanPasswordConfirm;
-use TroskiShop\Application\Security\HasherPasswordInterface;
 use TroskiShop\Domain\Model\User;
 use TroskiShop\Domain\Repository\UserRepositoryInterface;
+use TroskiShop\Domain\Security\HasherPasswordInterface;
 use TroskiShop\Infrastructure\Framework\Symfony\Security\SecurityUser;
 
 class RegisterNewUser

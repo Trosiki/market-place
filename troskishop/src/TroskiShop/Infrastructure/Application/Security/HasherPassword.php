@@ -4,7 +4,7 @@ namespace TroskiShop\Infrastructure\Application\Security;
 
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use TroskiShop\Application\Security\HasherPasswordInterface;
+use TroskiShop\Domain\Security\HasherPasswordInterface;
 
 class HasherPassword implements HasherPasswordInterface
 {
