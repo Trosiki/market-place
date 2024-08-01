@@ -9,8 +9,11 @@ class Product
     private float $price;
     private string $image;
     private string $specification;
-
     private string $category;
+    private bool $active;
+    private string $uri;
+    private string $brand;
+    private string $model;
 
     public function __construct()
     {
@@ -85,4 +88,45 @@ class Product
     {
         $this->category = $category;
     }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
+    }
+
+    public function getUri(): string
+    {
+        return $this->uri;
+    }
+
+    public function setUri(string $uri): void
+    {
+        $this->uri = $uri;
+    }
+
+    public function getBrand(): string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): void
+    {
+        $this->brand = $brand;
+    }
+
+    public function getModel(): string
+    {
+        return $this->model;
+    }
+
+    public function setModel(string $model): void
+    {
+        $this->model = $model;
+    }
+
 }

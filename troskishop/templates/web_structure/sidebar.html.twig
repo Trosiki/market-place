@@ -1,29 +1,33 @@
-<!-- Sidebar -->
 <div class="col-3">
     <aside class="sidebar">
         <h4>Filtros</h4>
-        <form>
-            <!-- Filtro por Nombre -->
+        <form hx-post="{{ path('products') }}" hx-swap="outerHTML" hx-target="#products" hx-indicator="#loader-products">
             <div class="mb-3">
                 <h5>Buscar por Nombre</h5>
-                <input type="text" class="form-control" placeholder="Nombre del producto">
+                <input type="text" class="form-control" name="name" placeholder="Nombre del producto">
             </div>
-            <!-- Filtro por Categoría -->
             <div class="mb-3">
                 <h5>Categoría</h5>
-                <select class="form-select" aria-label="Select category">
-                    <option selected>Selecciona una categoría</option>
-                    <option value="1">Portátiles</option>
-                    <option value="2">Sobremesa</option>
-                    <option value="3">Periféricos</option>
+                <select class="form-select" name="category" aria-label="Select category">
+                    <option value="" selected>Selecciona una categoría</option>
+                    {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }} ({{ category.total }})</option>
+                    {% endfor %}
                 </select>
             </div>
-
-            <!-- Filtro por Rango de Precio -->
+            <div class="mb-3">
+                <h5>Marca</h5>
+                <select class="form-select" name="brand" aria-label="Select category">
+                    <option value="" selected>Selecciona una Marca</option>
+                    {% for brand in brands %}
+                        <option value="{{ brand.name }}">{{ brand.name }} ({{ brand.total }})</option>
+                    {% endfor %}
+                </select>
+            </div>
             <div class="mb-3">
                 <h5>Rango de Precio</h5>
-                <input type="number" class="form-control" placeholder="Mínimo" aria-label="Min price">
-                <input type="number" class="form-control mt-2" placeholder="Máximo" aria-label="Max price">
+                <input type="number" class="form-control" name="priceMin" placeholder="Mínimo" aria-label="Min price">
+                <input type="number" class="form-control mt-2" name="priceMax" placeholder="Máximo" aria-label="Max price">
             </div>
             <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
         </form>

@@ -3,7 +3,6 @@
 namespace TroskiShop\Infrastructure\Domain\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use TroskiShop\Domain\Model\User;
 use TroskiShop\Domain\Repository\UserRepositoryInterface;
