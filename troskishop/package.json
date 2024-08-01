@@ -12,6 +12,7 @@
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
+    "htmx.org": "^2.0.1",
     "popper.js": "^1.16.1"
   },
   "scripts": {
