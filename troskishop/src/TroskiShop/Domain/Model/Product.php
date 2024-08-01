@@ -11,6 +11,9 @@ class Product
     private string $specification;
     private string $category;
     private bool $active;
+    private string $uri;
+    private string $brand;
+    private string $model;
 
     public function __construct()
     {
@@ -95,4 +98,35 @@ class Product
     {
         $this->active = $active;
     }
+
+    public function getUri(): string
+    {
+        return $this->uri;
+    }
+
+    public function setUri(string $uri): void
+    {
+        $this->uri = $uri;
+    }
+
+    public function getBrand(): string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): void
+    {
+        $this->brand = $brand;
+    }
+
+    public function getModel(): string
+    {
+        return $this->model;
+    }
+
+    public function setModel(string $model): void
+    {
+        $this->model = $model;
+    }
+
 }

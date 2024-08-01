@@ -10,12 +10,18 @@
                 <h5>Categoría</h5>
                 <select class="form-select" name="category" aria-label="Select category">
                     <option value="" selected>Selecciona una categoría</option>
-                    <option value="Portatil">Portátiles</option>
-                    <option value="Sobremesa">Sobremesa</option>
-                    <option value="Ratón">Ratones</option>
-                    <option value="Teclado">Teclados</option>
-                    <option value="Monitor">Monitores</option>
-                    <option value="Cascos">Cascos</option>
+                    {% for category in categories %}
+                        <option value="{{ category.name }}">{{ category.name }} ({{ category.total }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <h5>Marca</h5>
+                <select class="form-select" name="brand" aria-label="Select category">
+                    <option value="" selected>Selecciona una Marca</option>
+                    {% for brand in brands %}
+                        <option value="{{ brand.name }}">{{ brand.name }} ({{ brand.total }})</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="mb-3">

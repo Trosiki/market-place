@@ -21,9 +21,29 @@ class DoctrineProductRepository extends ServiceEntityRepository implements Produ
     {
         $queryBuilder = $this->createQueryBuilder('p');
         $this->configureFiltersInQueryBuilderFromProductsFilter($queryBuilder, $productsFilterDto);
-//        var_dump($queryBuilder->getQuery()->getSQL());die;
         return $queryBuilder->getQuery()->getResult();
 
+    }
+
+    public function findByUri(string $uri): Product
+    {
+        return $this->findOneBy(['uri' => $uri]);
+    }
+
+    public function countAllBrands(): array
+    {
+        return $this->createQueryBuilder('p')
+                ->select('p.brand as brand','COUNT(p.brand) as count')
+                ->groupBy('p.brand')
+                ->getQuery()->getArrayResult();
+    }
+
+    public function countAllCategories(): array
+    {
+        return $this->createQueryBuilder('p')
+                ->select('p.category as category','COUNT(p.category) as count')
+                ->groupBy('p.category')
+                ->getQuery()->getArrayResult();
     }
 
     private function configureFiltersInQueryBuilderFromProductsFilter(QueryBuilder $queryBuilder, ProductsFilterDto $productsFilterDto): void
@@ -39,6 +59,11 @@ class DoctrineProductRepository extends ServiceEntityRepository implements Produ
         if(!empty($productsFilterDto->getCategory())) {
             $queryBuilder->andWhere('p.category = :category')
                 ->setParameter('category', $productsFilterDto->getCategory());
+        }
+
+        if(!empty($productsFilterDto->getBrand())) {
+            $queryBuilder->andWhere('p.brand = :brand')
+                ->setParameter('brand', $productsFilterDto->getBrand());
         }
 
         if(!empty($productsFilterDto->getPriceMin())) {

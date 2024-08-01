@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use TroskiShop\Application\DTOs\Products\ProductsFilterDto;
+use TroskiShop\Application\Services\Products\ObtainAllBrandsWithTotal;
+use TroskiShop\Application\Services\Products\ObtainAllCategoriessWithTotal;
 use TroskiShop\Application\Services\Products\ObtainProductListFromProductsFilter;
 use TroskiShop\Domain\Model\Product;
 use TroskiShop\Domain\Model\ShoppingCartProduct;
@@ -13,7 +15,7 @@ use TroskiShop\Domain\Model\ShoppingCartProduct;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function indexAction(ObtainProductListFromProductsFilter $obtainProductListFromProductsFilter): Response
+    public function indexAction(ObtainProductListFromProductsFilter $obtainProductListFromProductsFilter, ObtainAllBrandsWithTotal $allBrandsWithTotal, ObtainAllCategoriessWithTotal $allCategoriessWithTotal): Response
     {
         $shoppingCartProducts = [];
         $totalPrice = 0;
@@ -33,10 +35,13 @@ class HomeController extends AbstractController
         }
 
         $products = $obtainProductListFromProductsFilter->execute(new ProductsFilterDto());
-
+        $categories = $allCategoriessWithTotal->execute();
+        $brands = $allBrandsWithTotal->execute();
         return $this->render('front_pages/catalog.html.twig', [
             "products" => $products->getProducts(),
             "shoppingCartProducts" => $shoppingCartProducts,
+            "categories" => $categories,
+            "brands"     => $brands,
             "totalPrice" => $totalPrice
         ]);
     }

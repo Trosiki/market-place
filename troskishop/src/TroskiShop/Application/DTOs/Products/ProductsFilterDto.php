@@ -9,9 +9,11 @@ class ProductsFilterDto
     private ?float $priceMin;
     private ?float $priceMax;
     private ?int $lastProductId;
+
+    private ?string $brand;
     private bool $active;
 
-    public function __construct(?string $nameProduct = null, ?string $category = null, ?float $priceMin = null, ?float $priceMax = null, ?int $idOfLastProduct = null, $active = true)
+    public function __construct(?string $nameProduct = null, ?string $category = null, ?float $priceMin = null, ?float $priceMax = null, ?string $brand = null, ?int $idOfLastProduct = null, bool $active = true)
     {
         $this->nameProduct = $nameProduct;
         $this->category = $category;
@@ -19,6 +21,7 @@ class ProductsFilterDto
         $this->priceMax = $priceMax;
         $this->lastProductId = $idOfLastProduct;
         $this->active = $active;
+        $this->brand = $brand;
     }
 
     public function getNameProduct(): ?string
@@ -79,6 +82,16 @@ class ProductsFilterDto
     public function setActive(bool $active): void
     {
         $this->active = $active;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?string $brand): void
+    {
+        $this->brand = $brand;
     }
 
 }

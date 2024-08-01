@@ -12,23 +12,32 @@ class ProductCatalogDto
     private float $price;
     private string $image;
 
+    private string $uri;
+
     /**
      * @param int $id
      * @param string $name
      * @param float $price
      */
-    public function __construct(int $id, string $name, string $category, float $price, string $image)
+    public function __construct(int $id, string $name, string $category, float $price, string $image, string $uri)
     {
         $this->id = $id;
         $this->name = $name;
         $this->category = $category;
         $this->price = $price;
         $this->image = $image;
+        $this->uri = $uri;
     }
 
     public static function createFromProduct(Product $product): self
     {
-        return new self($product->getId(), $product->getName(), $product->getCategory(),$product->getPrice(), $product->getImage());
+        return new self($product->getId(),
+            $product->getName(),
+            $product->getCategory(),
+            $product->getPrice(),
+            $product->getImage(),
+            $product->getUri()
+        );
     }
 
     public function getId(): int
@@ -79,5 +88,15 @@ class ProductCatalogDto
     public function setCategory(string $category): void
     {
         $this->category = $category;
+    }
+
+    public function getUri(): string
+    {
+        return $this->uri;
+    }
+
+    public function setUri(string $uri): void
+    {
+        $this->uri = $uri;
     }
 }

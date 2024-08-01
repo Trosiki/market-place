@@ -35,7 +35,8 @@ class ListProductsController extends AbstractController
             $request->request->get('name'),
             $request->request->get('category'),
             (float) $request->request->get('priceMin'),
-            (float) $request->request->get('priceMax')
+            (float) $request->request->get('priceMax'),
+            $request->request->get('brand')
         );
     }
 
