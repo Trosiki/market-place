@@ -10,12 +10,13 @@ class ProductList
         $this->products = $products;
     }
 
-    public static function createFromArrayProduct(array $products)
+    public static function createFromArrayProduct(array $products): self
     {
         $productsList = new self();
         foreach ($products as $product) {
             $productsList->addProduct(ProductCatalogDto::createFromProduct($product));
         }
+        return $productsList;
     }
 
     public function getProducts(): array

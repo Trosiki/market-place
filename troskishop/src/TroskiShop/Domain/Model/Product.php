@@ -9,8 +9,8 @@ class Product
     private float $price;
     private string $image;
     private string $specification;
-
     private string $category;
+    private bool $active;
 
     public function __construct()
     {
@@ -84,5 +84,15 @@ class Product
     public function setCategory(string $category): void
     {
         $this->category = $category;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
     }
 }

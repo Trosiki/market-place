@@ -14,5 +14,6 @@
         <field name="price" type="float" column="price"/>
         <field name="image" type="string" column="image" length="255"/>
         <field name="specification" type="text" column="specification"/>
+        <field name="active" type="boolean" column="active"/>
     </entity>
 </doctrine-mapping>
