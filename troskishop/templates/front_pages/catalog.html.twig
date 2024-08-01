@@ -5,6 +5,13 @@
 <div class="container-fluid">
     <h2>Todos los productos</h2>
     <hr>
-    {% include 'front_pages/products/products-list.html.twig' with {products: products} %}
+    <div class="d-flex col-12 justify-content-center htmx-indicator" id="loader-products">
+        <div class="spinner-border hx-indicator" role="status">
+            <span class="sr-only">Cargando...</span>
+        </div>
+    </div>
+    <div id="products" class="d-flex flex-wrap">
+        {% include 'front_pages/products/products-list.html.twig' with {products: products} %}
+    </div>
 </div>
 {% endblock %}

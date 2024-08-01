@@ -13,30 +13,30 @@ use TroskiShop\Application\Services\Products\ObtainProductListFromProductsFilter
 class ListProductsController extends AbstractController
 {
 
-    #[Route('/products', 'products')]
-    public function listProducts(Request $request, ObtainProductListFromProductsFilter $obtainProductListFromProductsFilter): Response
+    #[Route('/products/{lastProductId}', 'products')]
+    public function listProducts(Request $request, ObtainProductListFromProductsFilter $obtainProductListFromProductsFilter, ?int $lastProductId = null): Response
     {
         $products = new ProductList();
         try {
-            $productsFilter = $this->createProductsFilterFromRequest($request);
+            $productsFilter = $this->createProductsFilterFromRequest($request, $lastProductId);
             $products = $obtainProductListFromProductsFilter->execute($productsFilter);
         } catch (\Exception $e) {
             $this->addFlash('error', $e->getMessage());
         }
-
         return $this->render('front_pages/products/products-list.html.twig', [
             "products" => $products->getProducts()
         ]);
     }
 
-    private function createProductsFilterFromRequest(Request $request)
+    private function createProductsFilterFromRequest(Request $request, ?int $lastProductId = null): ProductsFilterDto
     {
         return new ProductsFilterDto(
             $request->request->get('name'),
             $request->request->get('category'),
             (float) $request->request->get('priceMin'),
             (float) $request->request->get('priceMax'),
-            $request->request->get('brand')
+            $request->request->get('brand'),
+            $lastProductId
         );
     }
 

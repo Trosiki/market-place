@@ -1,10 +1,25 @@
-<div id="products" class="d-flex flex-wrap">
-    <div class="d-flex col-12 justify-content-center htmx-indicator" id="loader-products">
-        <div class="spinner-border hx-indicator" role="status">
-            <span class="sr-only">Loading...</span>
+{% for product in products %}
+    <div class="card product-card shadow-sm m-3"
+            {% if loop.last %}
+        hx-post="{{ path('products', {lastProductId: product.id}) }}"
+        hx-trigger="revealed"
+        hx-target="#loader-products-scroll"
+        hx-swap="outerHTML"
+        hx-include=".filters"
+        hx-indicator="#loader-products-scroll"
+            {% endif %}>
+
+        <img src="{{ asset(product.image) }}" class="card-img-top" alt="Product Image">
+        <div class="card-body">
+            <span class="badge rounded-pill bg-secondary">{{ product.category }}</span>
+            <h5 class="card-title"><a href="{{ path('detail_product', {uri:product.uri}) }}">{{ product.name }}</a></h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ product.price }} €</h6>
+            <a href="#" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Agregar al carrito</a>
         </div>
     </div>
-    {% for product in products %}
-        {% include 'front_pages/products/card-product.html.twig' with {product: product} %}
-    {% endfor %}
+{% endfor %}
+<div class="d-flex col-12 justify-content-center htmx-indicator" id="loader-products-scroll">
+    <div class="spinner-border hx-indicator" role="status">
+        <span class="sr-only">Cargando...</span>
+    </div>
 </div>
