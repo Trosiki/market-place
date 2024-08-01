@@ -1,5 +1,9 @@
-<div class="d-flex flex-wrap">
-
+<div id="products" class="d-flex flex-wrap">
+    <div class="d-flex col-12 justify-content-center htmx-indicator" id="loader-products">
+        <div class="spinner-border hx-indicator" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     {% for product in products %}
         {% include 'front_pages/products/card-product.html.twig' with {product: product} %}
     {% endfor %}
