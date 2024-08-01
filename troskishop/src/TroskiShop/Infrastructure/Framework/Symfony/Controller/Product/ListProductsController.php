@@ -34,9 +34,8 @@ class ListProductsController extends AbstractController
         return new ProductsFilterDto(
             $request->request->get('name'),
             $request->request->get('category'),
-            $request->request->get('price'),
-            $request->request->get('priceMin'),
-            $request->request->get('priceMax')
+            (float) $request->request->get('priceMin'),
+            (float) $request->request->get('priceMax')
         );
     }
 

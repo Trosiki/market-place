@@ -21,6 +21,7 @@ class DoctrineProductRepository extends ServiceEntityRepository implements Produ
     {
         $queryBuilder = $this->createQueryBuilder('p');
         $this->configureFiltersInQueryBuilderFromProductsFilter($queryBuilder, $productsFilterDto);
+//        var_dump($queryBuilder->getQuery()->getSQL());die;
         return $queryBuilder->getQuery()->getResult();
 
     }
@@ -31,7 +32,7 @@ class DoctrineProductRepository extends ServiceEntityRepository implements Produ
             ->setParameter('active', $productsFilterDto->isActive());
 
         if(!empty($productsFilterDto->getNameProduct())) {
-            $queryBuilder->andWhere('p.nameProduct LIKE :nameProduct')
+            $queryBuilder->andWhere('p.name LIKE :nameProduct')
                 ->setParameter('nameProduct', '%'.$productsFilterDto->getNameProduct().'%');
         }
 
