@@ -133,4 +133,11 @@ class User
         $this->shoppingCarts = $shoppingCarts;
     }
 
+    public function getActiveShoppingCart(): ?ShoppingCart
+    {
+        return $this->getShoppingCarts()->filter(function (ShoppingCart $shoppingCart) {
+            return $shoppingCart->isActive();
+        })->first();
+    }
+
 }

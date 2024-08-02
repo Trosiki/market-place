@@ -1,15 +1,23 @@
 <?php
 namespace TroskiShop\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 class ShoppingCart
 {
     private int $id;
-    private array $products;
-    private CartStatus $cartStatus;
+    private ?Collection $products;
+    private ?string $cartStatus;
     private User $user;
+    public const STATUS_ACTIVE = "Activo";
+    public const STATUS_FINISHED = "Finalizado";
 
-    public function __construct()
+    public function __construct(User $user, ?string $cartStatus = self::STATUS_ACTIVE)
     {
+        $this->user = $user;
+        $this->cartStatus = $cartStatus;
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): int
@@ -22,14 +30,16 @@ class ShoppingCart
         $this->id = $id;
     }
 
-    public function getCartStatus(): CartStatus
+    public function getCartStatus(): string
     {
         return $this->cartStatus;
     }
 
-    public function setCartStatus(CartStatus $cartStatus): void
+    public function setCartStatus(string $cartStatus): void
     {
-        $this->cartStatus = $cartStatus;
+        if($cartStatus === self::STATUS_ACTIVE || $cartStatus === self::STATUS_FINISHED) {
+            $this->cartStatus = $cartStatus;
+        }
     }
 
     public function getUser(): User
@@ -45,25 +55,19 @@ class ShoppingCart
     /**
      * @return mixed
      */
-    public function getProducts(): array
+    public function getProducts(): Collection
     {
         return $this->products;
     }
 
-    public function addProduct(ShoppingCartProduct $product): void
+    public function addProduct(ShoppingCartProduct $shoppingCartProduct): void
     {
-        $this->products[] = $product;
-        $product->setShoppingCart($this); // Ensure bidirectional relationship
+        $this->products[] = $shoppingCartProduct;
+        $shoppingCartProduct->setShoppingCart($this);
     }
 
-    public function removeProduct(ShoppingCartProduct $product): void
+    public function isActive(): bool
     {
-        foreach ($this->products as $key => $p) {
-            if ($p === $product) {
-                unset($this->products[$key]);
-                $product->setShoppingCart(null); // Ensure bidirectional relationship
-                break;
-            }
-        }
+        return ($this->getCartStatus() === self::STATUS_ACTIVE);
     }
 }
