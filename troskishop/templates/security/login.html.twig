@@ -4,16 +4,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                {% for message in app.flashes('error') %}
-                    <div class="alert alert-danger mt-3" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success mt-3" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
                 <div class="card-login mt-5 mb-5">
                     <div class="card-header">
                         <h3>Acceso a la Cuenta</h3>

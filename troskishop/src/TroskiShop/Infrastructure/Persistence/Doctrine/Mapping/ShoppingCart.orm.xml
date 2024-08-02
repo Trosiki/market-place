@@ -11,9 +11,7 @@
         <many-to-one field="user" target-entity="User" inversed-by="shoppingCarts">
             <join-column name="user_id" referenced-column-name="id" nullable="false"/>
         </many-to-one>
-        <many-to-one field="cartStatus" target-entity="CartStatus">
-            <join-column name="cart_status_id" referenced-column-name="id" nullable="false"/>
-        </many-to-one>
+        <field name="cartStatus" type="string" column="cartStatus" length="50"/>
         <one-to-many field="products" target-entity="ShoppingCartProduct" mapped-by="shoppingCart"/>
     </entity>
 </doctrine-mapping>

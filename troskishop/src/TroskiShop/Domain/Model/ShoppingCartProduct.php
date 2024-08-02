@@ -8,8 +8,10 @@ class ShoppingCartProduct
     private ShoppingCart $shoppingCart;
     private int $quantity;
 
-    public function __construct()
+    public function __construct(Product $product, int $quantity)
     {
+        $this->product = $product;
+        $this->quantity = $quantity;
     }
 
     public function getId(): int

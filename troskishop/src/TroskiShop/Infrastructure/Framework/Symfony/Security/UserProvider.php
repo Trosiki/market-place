@@ -8,15 +8,19 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use TroskiShop\Domain\Model\User;
+use TroskiShop\Domain\Repository\ShoppingCartRepositoryInterface;
 use TroskiShop\Domain\Repository\UserRepositoryInterface;
 
 class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
+    private ShoppingCartRepositoryInterface $shoppingCartRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository, ShoppingCartRepositoryInterface $shoppingCartRepository)
     {
         $this->userRepository = $userRepository;
+        $this->shoppingCartRepository = $shoppingCartRepository;
     }
 
     public function refreshUser(UserInterface $user)
@@ -35,7 +39,8 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        $appUser =  $this->userRepository->findByEmail($identifier);
+        /** @var User $appUser */
+        $appUser =  $this->userRepository->findWithActiveShoppingCartByEmail($identifier);
         if(empty($appUser)) {
             throw new UserNotFoundException('User not found.');
         }

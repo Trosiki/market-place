@@ -15,7 +15,7 @@
             <h5 class="card-title col-12"><a href="{{ path('detail_product', {uri:product.uri}) }}">{{ product.name }}</a></h5>
             <h6 class="card-subtitle col-12 mb-2 text-muted">{{ product.price }} €</h6>
 
-            <form class="align-self-end" hx-put="{{ path('add_to_shoppingcart') }}" hx-target="#shoppingCartDropdown" hx-swap="innerHTML">
+            <form class="align-self-end" action="{{ path('add_to_shoppingcart') }}" method="POST">
                 <div class="input-group mb-2">
                     <button class="btn btn-outline-dark btn-modify-quantity" data-modifier="remove" type="button"><i class="fas fa-minus"></i></button>
                     <input type="number" class="form-control text-center quantity" name="quantity" min="1" value="1" readonly />
