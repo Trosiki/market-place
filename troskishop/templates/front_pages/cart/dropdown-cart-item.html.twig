@@ -1,4 +1,4 @@
-{% if shoppingCartProducts is defined and shoppingCartProducts | length > 0 %}
+{% if shoppingCartActiveExists and app.user.appUser.activeShoppingCart.products | length > 0 %}
     {% for shoppingCartProduct in shoppingCartProducts %}
         <li>
             <div class="cart-preview-item">
