@@ -75,7 +75,7 @@ class ShoppingCart
                 $shoppingCartProduct->setShoppingCart($this);
             }
         } else {
-            throw new CannotAddMoreProductInShoppingCart($this->getTotalProducts(), ($this->getTotalProducts()+$shoppingCartProduct->getQuantity()));
+            throw new CannotAddMoreProductInShoppingCart($this->getTotalProducts(), ($this->getTotalProducts()+$quantity));
         }
     }
 
