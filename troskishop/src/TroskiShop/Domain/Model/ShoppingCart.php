@@ -63,12 +63,17 @@ class ShoppingCart
     {
         return $this->products;
     }
-
-    public function addProduct(ShoppingCartProduct $shoppingCartProduct): void
+    public function addProduct(Product $product, int $quantity): void
     {
-        if($this->canAddProduct($shoppingCartProduct)) {
-            $this->products[] = $shoppingCartProduct;
-            $shoppingCartProduct->setShoppingCart($this);
+        if($this->canAddProduct($quantity)) {
+            $shoppingCartProduct = $this->filterShoppingCartProductFromProductId($product->getId());
+            if($shoppingCartProduct instanceof ShoppingCartProduct) {
+                $shoppingCartProduct->setQuantity($shoppingCartProduct->getQuantity() + $quantity);
+            } else {
+                $shoppingCartProduct = new ShoppingCartProduct($product, $quantity);
+                $this->products[] = $shoppingCartProduct;
+                $shoppingCartProduct->setShoppingCart($this);
+            }
         } else {
             throw new CannotAddMoreProductInShoppingCart($this->getTotalProducts(), ($this->getTotalProducts()+$shoppingCartProduct->getQuantity()));
         }
@@ -89,9 +94,16 @@ class ShoppingCart
         return $totalProducts;
     }
 
-    public function canAddProduct(ShoppingCartProduct $shoppingCartProduct): bool
+    private function canAddProduct(int $quantity): bool
     {
-        $newTotalProducts = $this->getTotalProducts() + $shoppingCartProduct->getQuantity();
+        $newTotalProducts = $this->getTotalProducts() + $quantity;
         return ($newTotalProducts > 0 && $newTotalProducts <= self::MAX_PRODUCTS_IN_SHOPPINGCART);
+    }
+
+    private function filterShoppingCartProductFromProductId(int $productId): false|ShoppingCartProduct
+    {
+        return $this->products->filter(function (ShoppingCartProduct $shoppingCartProduct) use ($productId) {
+           return $shoppingCartProduct->getProduct()->getId() === $productId;
+        })->first();
     }
 }

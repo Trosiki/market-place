@@ -39,8 +39,6 @@ class DoctrineUserRepository extends ServiceEntityRepository implements UserRepo
             ->addSelect('sc','scp','p')
             ->where('u.email = :email')
             ->setParameter('email', $email)
-            ->andWhere('sc.cartStatus = :cartStatus')
-            ->setParameter('cartStatus', ShoppingCart::STATUS_ACTIVE)
             ->getQuery()->getOneOrNullResult();
     }
 }

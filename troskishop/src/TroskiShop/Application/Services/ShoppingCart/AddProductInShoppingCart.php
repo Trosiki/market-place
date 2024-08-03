@@ -4,24 +4,17 @@ namespace TroskiShop\Application\Services\ShoppingCart;
 
 use TroskiShop\Application\DTOs\ShoppingCart\ProductToAddToShoppingCart;
 use TroskiShop\Domain\Model\ShoppingCart;
-use TroskiShop\Domain\Model\ShoppingCartProduct;
 use TroskiShop\Domain\Repository\ProductRepositoryInterface;
-use TroskiShop\Domain\Repository\ShoppingCartProductRepositoryInterface;
 use TroskiShop\Domain\Repository\ShoppingCartRepositoryInterface;
-use TroskiShop\Domain\Repository\UserRepositoryInterface;
 
 class AddProductInShoppingCart
 {
     private ProductRepositoryInterface $productRepository;
     private ShoppingCartRepositoryInterface $shoppingCartRepository;
-    private ShoppingCartProductRepositoryInterface $shoppingCartProductRepository;
-    private UserRepositoryInterface $userRepository;
 
-    public function __construct(ProductRepositoryInterface $productRepository, ShoppingCartRepositoryInterface $shoppingCartRepository, ShoppingCartProductRepositoryInterface $shoppingCartProductRepository, UserRepositoryInterface $userRepository) {
+    public function __construct(ProductRepositoryInterface $productRepository, ShoppingCartRepositoryInterface $shoppingCartRepository) {
         $this->productRepository = $productRepository;
         $this->shoppingCartRepository = $shoppingCartRepository;
-        $this->shoppingCartProductRepository = $shoppingCartProductRepository;
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -31,11 +24,8 @@ class AddProductInShoppingCart
     {
         $product = $this->productRepository->findByUri($productToAddToShoppingCart->getProductUri());
         $shoppingCart = $this->getShoppingCartOrCreateFrom($productToAddToShoppingCart);
-        $shoppingCartProduct = new ShoppingCartProduct($product, $productToAddToShoppingCart->getQuantity());
-        $shoppingCart->addProduct($shoppingCartProduct);
-        $this->shoppingCartRepository->save($shoppingCart);
-        $this->shoppingCartProductRepository->save($shoppingCartProduct);
-        $this->userRepository->save($productToAddToShoppingCart->getShoppingCartOwner(),true);
+        $shoppingCart->addProduct($product, $productToAddToShoppingCart->getQuantity());
+        $this->shoppingCartRepository->save($shoppingCart, true);
     }
 
     private function getShoppingCartOrCreateFrom(ProductToAddToShoppingCart $productToAddToShoppingCart): ShoppingCart
@@ -43,7 +33,7 @@ class AddProductInShoppingCart
         $shoppingCart = $productToAddToShoppingCart->getShoppingCart();
         if(!$shoppingCart) {
             $shoppingCart = new ShoppingCart($productToAddToShoppingCart->getShoppingCartOwner());
-            $this->shoppingCartRepository->save($shoppingCart,true);
+            $this->shoppingCartRepository->save($shoppingCart);
         }
         return $shoppingCart;
     }

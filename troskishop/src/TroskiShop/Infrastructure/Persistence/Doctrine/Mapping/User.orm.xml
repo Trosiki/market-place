@@ -14,7 +14,7 @@
         <field name="nif" type="string" column="nif" length="50"/>
         <field name="name" type="string" column="name" length="100"/>
         <field name="surname" type="string" column="surname" length="100"/>
-        <field name="email" type="string" column="email" length="100"/>
+        <field name="email" type="string" column="email" length="100" unique="true"/>
         <field name="password" type="string" column="password" length="255"/>
         <field name="telephone" type="string" column="telephone" length="20"/>
         <field name="roles" type="json" column="roles" length="200"/>

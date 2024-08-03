@@ -28,7 +28,8 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
         if(!$user instanceof SecurityUser) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
         }
-
+        $appUser =  $this->userRepository->findWithActiveShoppingCartByEmail($user->getUserIdentifier());
+        $user->setAppUser($appUser);
         return $user;
     }
 
