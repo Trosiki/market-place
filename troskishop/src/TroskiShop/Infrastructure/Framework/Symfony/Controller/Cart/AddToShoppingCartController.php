@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use TroskiShop\Application\DTOs\ShoppingCart\ProductToAddToShoppingCart;
 use TroskiShop\Application\Exceptions\CannotAddMoreProductInShoppingCart;
+use TroskiShop\Application\Exceptions\ProductNotFoundException;
 use TroskiShop\Application\Services\ShoppingCart\AddProductInShoppingCart;
 use TroskiShop\Domain\Model\ShoppingCart;
 use TroskiShop\Domain\Model\User;
@@ -34,6 +35,8 @@ class AddToShoppingCartController extends AbstractController
             $shoppingCartRepository->rollbackTransaction();
             $this->addFlash('error','El carrito no puede superar el número total de '. ShoppingCart::MAX_PRODUCTS_IN_SHOPPINGCART . ' está tratando de obtener ' . $e->getNewTotal() .' productos en una única compra.');
             return $this->redirectToRoute('homepage');
+        } catch (ProductNotFoundException $e) {
+            $this->addFlash('error','El producto no existe en el sistema.');
         } catch (\Exception $e) {
             $shoppingCartRepository->rollbackTransaction();
             $this->addFlash('error','Se ha producido un error inesperado, vuelva a intentarlo más adelante. ' .$e->getMessage());
