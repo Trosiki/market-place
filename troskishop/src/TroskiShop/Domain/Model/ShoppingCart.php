@@ -106,4 +106,13 @@ class ShoppingCart
            return $shoppingCartProduct->getProduct()->getId() === $productId;
         })->first();
     }
+
+    public function getTotalPrice(): float
+    {
+        $totalPrice = 0;
+        foreach($this->getProducts() as $shoppingCartProduct) {
+            $totalPrice += $shoppingCartProduct->getTotalPrice();
+        }
+        return $totalPrice;
+    }
 }

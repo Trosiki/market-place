@@ -25,7 +25,7 @@ class AddToShoppingCartController extends AbstractController
             $this->addFlash('error','Para añadir un producto al carrito debe iniciar sesión.');
             return $this->redirectToRoute('app_login',[]);
         }
-
+        $routeToRedirect = $request->headers->get('referer') ?? $this->generateUrl('homepage');
         $shoppingCartRepository->beginTransaction();
         try {
             $productToAddToShoppingCart = $this->generateProductToAddToShoppingCartFromRequest($request, $user);
@@ -34,16 +34,16 @@ class AddToShoppingCartController extends AbstractController
         } catch (CannotAddMoreProductInShoppingCart $e) {
             $shoppingCartRepository->rollbackTransaction();
             $this->addFlash('error','El carrito no puede superar el número total de '. ShoppingCart::MAX_PRODUCTS_IN_SHOPPINGCART . ' está tratando de obtener ' . $e->getNewTotal() .' productos en una única compra.');
-            return $this->redirectToRoute('homepage');
+            return $this->redirect($routeToRedirect);
         } catch (ProductNotFoundException $e) {
             $this->addFlash('error','El producto no existe en el sistema.');
+            return $this->redirect($routeToRedirect);
         } catch (\Exception $e) {
             $shoppingCartRepository->rollbackTransaction();
             $this->addFlash('error','Se ha producido un error inesperado, vuelva a intentarlo más adelante. ' .$e->getMessage());
-            return $this->redirectToRoute('homepage');
+            return $this->redirect($routeToRedirect);
         }
 
-        $routeToRedirect = $request->headers->get('referer') ?? $this->generateUrl('homepage');
         return $this->redirect($routeToRedirect);
     }
 

@@ -28,7 +28,21 @@
                 <span>{{ product.category }}</span>
             </div>
         </div>
-        <button class="btn btn-add-to-cart mt-4">Agregar al carrito <i class="fas fa-cart-plus"></i></button>
+        <form class="align-self-end" action="{{ path('add_to_shoppingcart') }}" method="POST">
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group mt-2 col-6">
+                        <button class="btn btn-outline-dark btn-modify-quantity" data-modifier="remove" type="button"><i class="fas fa-minus"></i></button>
+                        <input type="number" class="form-control text-center quantity" name="quantity" min="1" value="1" readonly />
+                        <button class="btn btn-outline-dark btn-modify-quantity" data-modifier="add" type="button"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input type="hidden" name="uri" value="{{ product.uri }}" />
+                    <button type="submit" class="btn btn-add-to-cart col-6">Agregar al carrito <i class="fas fa-cart-plus"></i></button>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="col-md-12">
         <div class="product-specification">
