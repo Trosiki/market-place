@@ -32,10 +32,10 @@ class AddProductInShoppingCart
         $product = $this->productRepository->findByUri($productToAddToShoppingCart->getProductUri());
         $shoppingCart = $this->getShoppingCartOrCreateFrom($productToAddToShoppingCart);
         $shoppingCartProduct = new ShoppingCartProduct($product, $productToAddToShoppingCart->getQuantity());
+        $shoppingCart->addProduct($shoppingCartProduct);
         $this->shoppingCartRepository->save($shoppingCart);
         $this->shoppingCartProductRepository->save($shoppingCartProduct);
-        $shoppingCart->addProduct($shoppingCartProduct);
-        $this->userRepository->save($productToAddToShoppingCart->getShoppingCartOwner(), true);
+        $this->userRepository->save($productToAddToShoppingCart->getShoppingCartOwner(),true);
     }
 
     private function getShoppingCartOrCreateFrom(ProductToAddToShoppingCart $productToAddToShoppingCart): ShoppingCart
@@ -43,6 +43,7 @@ class AddProductInShoppingCart
         $shoppingCart = $productToAddToShoppingCart->getShoppingCart();
         if(!$shoppingCart) {
             $shoppingCart = new ShoppingCart($productToAddToShoppingCart->getShoppingCartOwner());
+            $this->shoppingCartRepository->save($shoppingCart,true);
         }
         return $shoppingCart;
     }

@@ -4,7 +4,10 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="TroskiShop\Domain\Model\Product" table="PRODUCT">
+    <entity name="TroskiShop\Domain\Model\Product"
+            table="PRODUCT"
+            repository-class="TroskiShop\Infrastructure\Domain\Repository\DoctrineProductRepository"
+    >
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
