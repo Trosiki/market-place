@@ -6,8 +6,8 @@
 
     <entity name="TroskiShop\Domain\Model\Order" table="ORDER">
         <id name="id" type="string" column="id"/>
-        <field name="shoppingCartId" type="integer" column="shopping_cart_id"/>
-        <field name="deliveryId" type="integer" column="delivery_id"/>
+        <one-to-one field="shoppingCart" target-entity="TroskiShop\Domain\Model\ShoppingCart"/>
+        <one-to-one field="delivery" target-entity="TroskiShop\Domain\Model\Delivery"/>
         <field name="createdAt" type="datetime" column="created_at"/>
         <field name="sendingDate" type="datetime" column="sending_date"/>
         <field name="deliveryDate" type="datetime" column="delivery_date"/>
