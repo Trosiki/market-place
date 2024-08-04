@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use TroskiShop\Application\DTOs\User\RegisterUserFormDto;
-use TroskiShop\Application\Exceptions\EmailIsAlreadyInUse;
-use TroskiShop\Application\Exceptions\PasswordNonEqualsThanPasswordConfirm;
 use TroskiShop\Application\Services\User\RegisterNewUser;
+use TroskiShop\Domain\Exceptions\EmailIsAlreadyInUseException;
+use TroskiShop\Domain\Exceptions\PasswordNonEqualsThanPasswordConfirmException;
 
 class RegistrationController extends AbstractController
 {
@@ -20,9 +20,9 @@ class RegistrationController extends AbstractController
             $registerUserFormDto = $this->createRegisterUserFormDtoFromRequest($request);
             $registerNewUser->execute($registerUserFormDto);
             $this->addFlash('success', 'Registro exitoso, por favor inicie sesión');
-        } catch (EmailIsAlreadyInUse $e){
+        } catch (EmailIsAlreadyInUseException $e){
             $this->addFlash('error','El email ya está en uso.');
-        } catch (PasswordNonEqualsThanPasswordConfirm $confirm){
+        } catch (PasswordNonEqualsThanPasswordConfirmException $confirm){
             $this->addFlash('error', 'La contraseña y la confirmación de contraseña no coinciden');
         } catch (\Exception $e) {
             $this->addFlash('error', $e->getMessage());

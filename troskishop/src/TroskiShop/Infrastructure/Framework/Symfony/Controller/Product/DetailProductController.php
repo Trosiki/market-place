@@ -5,8 +5,8 @@ namespace TroskiShop\Infrastructure\Framework\Symfony\Controller\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use TroskiShop\Application\Exceptions\ProductNotFoundException;
 use TroskiShop\Application\Services\Products\ObtainProductFromUri;
+use TroskiShop\Domain\Exceptions\ProductNotFoundExceptionException;
 
 class DetailProductController extends AbstractController
 {
@@ -15,7 +15,7 @@ class DetailProductController extends AbstractController
     {
         try{
             $product = $obtainProductFromUri->execute($uri);
-        } catch (ProductNotFoundException $e) {
+        } catch (ProductNotFoundExceptionException $e) {
             return $this->redirectToRoute('homepage');
         } catch (\Exception $e) {
             return $this->redirectToRoute('homepage');

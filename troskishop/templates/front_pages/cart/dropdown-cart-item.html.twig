@@ -1,5 +1,5 @@
-{% if shoppingCartProducts is defined and shoppingCartProducts | length > 0 %}
-    {% for shoppingCartProduct in shoppingCartProducts %}
+{% if shoppingCartActiveExists and app.user.appUser.activeShoppingCart.products | length > 0 %}
+    {% for shoppingCartProduct in app.user.appUser.activeShoppingCart.products %}
         <li>
             <div class="cart-preview-item">
                 <img src="{{ asset(shoppingCartProduct.product.image) }}" alt="Producto 1">

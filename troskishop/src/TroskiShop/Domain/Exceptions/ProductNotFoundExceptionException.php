@@ -1,8 +1,8 @@
 <?php
 
-namespace TroskiShop\Application\Exceptions;
+namespace TroskiShop\Domain\Exceptions;
 
-class ProductNotFoundException extends \Exception
+class ProductNotFoundExceptionException extends \Exception
 {
     public function __construct(string $identifier)
     {

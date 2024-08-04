@@ -2,15 +2,15 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <div class="container">
-    <div class="cart-container mb-5">
+    <div class="cart-container m-5">
         <h1 class="cart-header">Carrito de Compras</h1>
 
-        {% for shoppingCartProduct in shoppingCartProducts %}
+        {% for shoppingCartProduct in app.user.appUser.activeShoppingCart.products %}
             {% include 'front_pages/cart/cart-item.html.twig' with {shoppingCartProduct: shoppingCartProduct} %}
         {% endfor %}
 
         <div class="cart-total">
-            Total: {{ totalPrice }}€
+            Total: {{ app.user.appUser.activeShoppingCart.totalPrice }}€
         </div>
         <button class="btn btn-checkout mt-4">Proceder al Pago <i class="fas fa-credit-card"></i></button>
     </div>

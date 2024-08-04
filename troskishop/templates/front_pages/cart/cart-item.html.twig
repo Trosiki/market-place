@@ -8,6 +8,11 @@
     <div class="cart-item-quantity">{{ shoppingCartProduct.quantity }}</div>
     <div class="cart-item-total">{{ shoppingCartProduct.totalPrice }} €</div>
     <div class="cart-item-remove">
-        <i class="fas fa-trash"></i>
+        <form action="{{ path('remove_of_shoppingcart') }}" method="POST">
+            <input type="hidden" name="uri" value="{{ shoppingCartProduct.product.uri }}">
+            <button type="submit" class="btn btn-outline-danger">
+                <i class="fas fa-trash"></i>
+            </button>
+        </form>
     </div>
 </div>

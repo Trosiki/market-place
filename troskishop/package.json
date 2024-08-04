@@ -3,7 +3,7 @@
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@symfony/webpack-encore": "^1.0.0",
     "bootstrap": "^5.0.0",
-    "jquery": "^3.0.0",
+    "jquery": "^3.7.1",
     "popper.js": "^1.16.0",
     "sass": "^1.32.0",
     "sass-loader": "^11.0.0",
@@ -12,6 +12,7 @@
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
+    "core-js": "^3.37.1",
     "htmx.org": "^2.0.1",
     "popper.js": "^1.16.1"
   },

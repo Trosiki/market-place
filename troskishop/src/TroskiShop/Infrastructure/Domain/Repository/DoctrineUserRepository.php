@@ -4,6 +4,7 @@ namespace TroskiShop\Infrastructure\Domain\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use TroskiShop\Domain\Model\ShoppingCart;
 use TroskiShop\Domain\Model\User;
 use TroskiShop\Domain\Repository\UserRepositoryInterface;
 
@@ -27,5 +28,17 @@ class DoctrineUserRepository extends ServiceEntityRepository implements UserRepo
         if($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findWithActiveShoppingCartByEmail(string $email): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->leftJoin('u.shoppingCarts', 'sc')
+            ->leftJoin('sc.products', 'scp')
+            ->leftJoin('scp.product', 'p')
+            ->addSelect('sc','scp','p')
+            ->where('u.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()->getOneOrNullResult();
     }
 }

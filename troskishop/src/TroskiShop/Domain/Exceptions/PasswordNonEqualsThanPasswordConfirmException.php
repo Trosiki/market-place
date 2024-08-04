@@ -1,8 +1,8 @@
 <?php
 
-namespace TroskiShop\Application\Exceptions;
+namespace TroskiShop\Domain\Exceptions;
 
-class PasswordNonEqualsThanPasswordConfirm extends \Exception
+class PasswordNonEqualsThanPasswordConfirmException extends \Exception
 {
     public function __construct()
     {

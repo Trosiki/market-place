@@ -15,8 +15,20 @@ class Product
     private string $brand;
     private string $model;
 
-    public function __construct()
+    public function __construct(string $name = "", string $description = "", float $price = 0,
+                                string $image = "", string $specification = "", string $category = "",
+                                string $uri = "", string $brand = "", string $model = "", bool $active = true)
     {
+        $this->name = $name;
+        $this->description = $description;
+        $this->price = $price;
+        $this->image = $image;
+        $this->specification = $specification;
+        $this->category = $category;
+        $this->active = $active;
+        $this->uri = $uri;
+        $this->brand = $brand;
+        $this->model = $model;
     }
 
     public function getId(): int

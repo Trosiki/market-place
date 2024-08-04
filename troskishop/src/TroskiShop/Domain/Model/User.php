@@ -18,7 +18,7 @@ class User
     private array $roles;
     private ?Collection $shoppingCarts;
 
-    public function __construct(?string $nif = null, ?string $name = null, ?string $surname = null, ?string $telephone = null, ?string $email = null, ?string $password = null, array $roles = [SecurityUser::ROLE_USER] )
+    public function __construct(?string $nif = null, ?string $name = null, ?string $surname = null, ?string $telephone = null, ?string $email = null, ?string $password = null, Collection $shoppingCarts = new ArrayCollection(), array $roles = [SecurityUser::ROLE_USER] )
     {
         $this->nif = $nif;
         $this->name = $name;
@@ -27,7 +27,7 @@ class User
         $this->email = $email;
         $this->password = $password;
         $this->roles = $roles;
-        $this->shoppingCarts = new ArrayCollection();
+        $this->shoppingCarts = $shoppingCarts;
     }
 
     public static function createFromRegisterUserForm(RegisterUserFormDto $registerUserFormDto): User
@@ -131,6 +131,18 @@ class User
     public function setShoppingCarts(Collection $shoppingCarts): void
     {
         $this->shoppingCarts = $shoppingCarts;
+    }
+
+    public function addShoppingCart(ShoppingCart $shoppingCart): void
+    {
+        $this->shoppingCarts->add($shoppingCart);
+    }
+
+    public function getActiveShoppingCart(): false|ShoppingCart
+    {
+        return $this->getShoppingCarts()->filter(function (ShoppingCart $shoppingCart) {
+            return $shoppingCart->isActive();
+        })->first();
     }
 
 }
