@@ -100,7 +100,7 @@ class ShoppingCart
         return ($newTotalProducts > 0 && $newTotalProducts <= self::MAX_PRODUCTS_IN_SHOPPINGCART);
     }
 
-    private function filterShoppingCartProductFromProductId(int $productId): false|ShoppingCartProduct
+    public function filterShoppingCartProductFromProductId(int $productId): false|ShoppingCartProduct
     {
         return $this->products->filter(function (ShoppingCartProduct $shoppingCartProduct) use ($productId) {
            return $shoppingCartProduct->getProduct()->getId() === $productId;

@@ -2,7 +2,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <div class="container">
-    <div class="cart-container mb-5">
+    <div class="cart-container m-5">
         <h1 class="cart-header">Carrito de Compras</h1>
 
         {% for shoppingCartProduct in app.user.appUser.activeShoppingCart.products %}

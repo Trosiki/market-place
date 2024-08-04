@@ -23,4 +23,11 @@ class DoctrineShoppingCartProductRepository extends ServiceEntityRepository impl
         }
     }
 
+    public function remove(ShoppingCartProduct $shoppingCartProduct, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($shoppingCartProduct);
+        if($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
 }
