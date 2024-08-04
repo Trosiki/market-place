@@ -2,7 +2,7 @@
 
 namespace TroskiShop\Application\Services\Products;
 
-use TroskiShop\Application\Exceptions\ProductNotFoundException;
+use TroskiShop\Domain\Exceptions\ProductNotFoundExceptionException;
 use TroskiShop\Domain\Repository\ProductRepositoryInterface;
 
 class ObtainProductFromUri
@@ -19,7 +19,7 @@ class ObtainProductFromUri
     {
         $product = $this->productRepository->findByUri($uri);
         if (empty($product)) {
-            throw new ProductNotFoundException($uri);
+            throw new ProductNotFoundExceptionException($uri);
         }
 
         return $product;

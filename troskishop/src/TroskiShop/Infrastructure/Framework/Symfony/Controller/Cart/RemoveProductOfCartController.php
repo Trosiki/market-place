@@ -5,8 +5,9 @@ namespace TroskiShop\Infrastructure\Framework\Symfony\Controller\Cart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
-use TroskiShop\Application\Exceptions\ProductNotFoundException;
 use TroskiShop\Application\Services\ShoppingCart\DeleteProductOfShoppingCartFromUri;
+use TroskiShop\Domain\Exceptions\ProductNotFoundExceptionException;
+use TroskiShop\Domain\Exceptions\ShoppingCartFinishedIsNotEditableException;
 use TroskiShop\Domain\Model\User;
 
 class RemoveProductOfCartController extends AbstractController
@@ -30,7 +31,9 @@ class RemoveProductOfCartController extends AbstractController
 
             $deleteProductOfShoppingCartFromUri->execute($user->getActiveShoppingCart(), $request->request->get('uri'));
 
-        } catch (ProductNotFoundException $e) {
+        } catch (ShoppingCartFinishedIsNotEditableException $e) {
+            $this->addFlash('error','El carrito no se puede modificar porque está finalizado.');
+        } catch (ProductNotFoundExceptionException $e) {
             $this->addFlash('error', 'No se pudo eliminar el producto indicado');
         } catch (\Exception $e) {
             $this->addFlash('error', 'Se ha producido un error inesperado. ' . $e->getMessage());

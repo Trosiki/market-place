@@ -7,9 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use TroskiShop\Application\DTOs\ShoppingCart\ProductToAddToShoppingCart;
-use TroskiShop\Application\Exceptions\CannotAddMoreProductInShoppingCart;
-use TroskiShop\Application\Exceptions\ProductNotFoundException;
 use TroskiShop\Application\Services\ShoppingCart\AddProductInShoppingCart;
+use TroskiShop\Domain\Exceptions\CannotAddMoreProductInShoppingCartException;
+use TroskiShop\Domain\Exceptions\ProductNotFoundExceptionException;
+use TroskiShop\Domain\Exceptions\ShoppingCartFinishedIsNotEditableException;
 use TroskiShop\Domain\Model\ShoppingCart;
 use TroskiShop\Domain\Model\User;
 use TroskiShop\Domain\Repository\ShoppingCartRepositoryInterface;
@@ -31,11 +32,15 @@ class AddToShoppingCartController extends AbstractController
             $productToAddToShoppingCart = $this->generateProductToAddToShoppingCartFromRequest($request, $user);
             $addProductInShoppingCart->execute($productToAddToShoppingCart);
             $shoppingCartRepository->commit();
-        } catch (CannotAddMoreProductInShoppingCart $e) {
+        } catch (ShoppingCartFinishedIsNotEditableException $e) {
+            $shoppingCartRepository->rollbackTransaction();
+            $this->addFlash('error','El carrito no se puede modificar porque está finalizado.');
+            return $this->redirect($routeToRedirect);
+        } catch (CannotAddMoreProductInShoppingCartException $e) {
             $shoppingCartRepository->rollbackTransaction();
             $this->addFlash('error','El carrito no puede superar el número total de '. ShoppingCart::MAX_PRODUCTS_IN_SHOPPINGCART . ' está tratando de obtener ' . $e->getNewTotal() .' productos en una única compra.');
             return $this->redirect($routeToRedirect);
-        } catch (ProductNotFoundException $e) {
+        } catch (ProductNotFoundExceptionException $e) {
             $this->addFlash('error','El producto no existe en el sistema.');
             return $this->redirect($routeToRedirect);
         } catch (\Exception $e) {

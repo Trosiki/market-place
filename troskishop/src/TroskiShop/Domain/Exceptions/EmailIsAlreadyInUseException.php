@@ -1,8 +1,8 @@
 <?php
 
-namespace TroskiShop\Application\Exceptions;
+namespace TroskiShop\Domain\Exceptions;
 
-class EmailIsAlreadyInUse extends \Exception
+class EmailIsAlreadyInUseException extends \Exception
 {
     public function __construct(string $email)
     {

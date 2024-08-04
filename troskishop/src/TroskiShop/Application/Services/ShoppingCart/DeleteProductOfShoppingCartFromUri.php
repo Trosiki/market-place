@@ -2,7 +2,8 @@
 
 namespace TroskiShop\Application\Services\ShoppingCart;
 
-use TroskiShop\Application\Exceptions\ProductNotFoundException;
+use TroskiShop\Domain\Exceptions\ProductNotFoundExceptionException;
+use TroskiShop\Domain\Exceptions\ShoppingCartFinishedIsNotEditableException;
 use TroskiShop\Domain\Model\Product;
 use TroskiShop\Domain\Model\ShoppingCart;
 use TroskiShop\Domain\Repository\ProductRepositoryInterface;
@@ -22,7 +23,11 @@ class DeleteProductOfShoppingCartFromUri
     {
         $product = $this->productRepository->findByUri($uri);
         if(!$product instanceof Product) {
-            throw new ProductNotFoundException($uri);
+            throw new ProductNotFoundExceptionException($uri);
+        }
+
+        if($shoppingCart->getCartStatus() === ShoppingCart::STATUS_FINISHED) {
+            throw new ShoppingCartFinishedIsNotEditableException();
         }
 
         $shoppingCartProduct = $shoppingCart->filterShoppingCartProductFromProductId($product->getId());

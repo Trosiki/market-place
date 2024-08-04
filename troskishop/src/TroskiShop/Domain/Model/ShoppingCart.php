@@ -3,8 +3,8 @@ namespace TroskiShop\Domain\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use TroskiShop\Application\Exceptions\CannotAddMoreProductInShoppingCart;
-use TroskiShop\Application\Exceptions\ProductNotFoundException;
+use TroskiShop\Domain\Exceptions\CannotAddMoreProductInShoppingCartException;
+use TroskiShop\Domain\Exceptions\ShoppingCartFinishedIsNotEditableException;
 
 class ShoppingCart
 {
@@ -65,6 +65,10 @@ class ShoppingCart
     }
     public function addProduct(Product $product, int $quantity): void
     {
+        if($this->getCartStatus() === self::STATUS_FINISHED) {
+            throw new ShoppingCartFinishedIsNotEditableException();
+        }
+
         if($this->canAddProduct($quantity)) {
             $shoppingCartProduct = $this->filterShoppingCartProductFromProductId($product->getId());
             if($shoppingCartProduct instanceof ShoppingCartProduct) {
@@ -75,7 +79,7 @@ class ShoppingCart
                 $shoppingCartProduct->setShoppingCart($this);
             }
         } else {
-            throw new CannotAddMoreProductInShoppingCart($this->getTotalProducts(), ($this->getTotalProducts()+$quantity));
+            throw new CannotAddMoreProductInShoppingCartException($this->getTotalProducts(), ($this->getTotalProducts()+$quantity));
         }
     }
 

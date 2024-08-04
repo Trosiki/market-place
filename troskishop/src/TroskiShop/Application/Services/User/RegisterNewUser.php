@@ -3,8 +3,8 @@
 namespace TroskiShop\Application\Services\User;
 
 use TroskiShop\Application\DTOs\User\RegisterUserFormDto;
-use TroskiShop\Application\Exceptions\EmailIsAlreadyInUse;
-use TroskiShop\Application\Exceptions\PasswordNonEqualsThanPasswordConfirm;
+use TroskiShop\Domain\Exceptions\EmailIsAlreadyInUseException;
+use TroskiShop\Domain\Exceptions\PasswordNonEqualsThanPasswordConfirmException;
 use TroskiShop\Domain\Model\User;
 use TroskiShop\Domain\Repository\UserRepositoryInterface;
 use TroskiShop\Domain\Security\HasherPasswordInterface;
@@ -38,12 +38,12 @@ class RegisterNewUser
      * @param $password
      * @param $passwordConfirm
      * @return bool
-     * @throws PasswordNonEqualsThanPasswordConfirm
+     * @throws PasswordNonEqualsThanPasswordConfirmException
      */
     private function checkPasswordConfirmation($password, $passwordConfirm) :bool
     {
         if ($password !== $passwordConfirm) {
-            throw new PasswordNonEqualsThanPasswordConfirm();
+            throw new PasswordNonEqualsThanPasswordConfirmException();
         }
 
         return true;
@@ -54,7 +54,7 @@ class RegisterNewUser
         $user = $this->userRepository->findByEmail($email);
 
         if(!empty($user)) {
-            throw new EmailIsAlreadyInUse($email);
+            throw new EmailIsAlreadyInUseException($email);
         }
 
         return empty($user);

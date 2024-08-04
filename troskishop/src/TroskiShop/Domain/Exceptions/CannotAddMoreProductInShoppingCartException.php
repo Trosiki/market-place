@@ -1,11 +1,10 @@
 <?php
 
-namespace TroskiShop\Application\Exceptions;
+namespace TroskiShop\Domain\Exceptions;
 
 use TroskiShop\Domain\Model\ShoppingCart;
-use TroskiShop\Domain\Model\ShoppingCartProduct;
 
-class CannotAddMoreProductInShoppingCart extends \Exception
+class CannotAddMoreProductInShoppingCartException extends \Exception
 {
     private int $actualTotal;
     private int $newTotal;
