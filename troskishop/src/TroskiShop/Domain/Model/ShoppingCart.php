@@ -119,4 +119,15 @@ class ShoppingCart
         }
         return $totalPrice;
     }
+
+    public function getResumeShoppingCart(): string
+    {
+        $resume = [];
+        /** @var ShoppingCartProduct $shoppingCartProduct */
+        foreach($this->getProducts() as $shoppingCartProduct) {
+            $resume[] = $shoppingCartProduct->getResume();
+        }
+
+        return implode(", ", $resume);
+    }
 }

@@ -10,9 +10,8 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use TroskiShop\Application\DTOs\Payment\CreatePaymentRequest;
 use TroskiShop\Domain\Exceptions\PaymentProgressWrongException;
-use TroskiShop\Domain\Services\PaymentGatewayInterface;
-use TroskiShop\Domain\Services\PaymentInterface;
 
 class PaypalPaymentGatewayService
 {
@@ -23,21 +22,25 @@ class PaypalPaymentGatewayService
     public function __construct(string $clientId, string $clientSecret, string $mode)
     {
         $this->apiContext = new ApiContext(new OAuthTokenCredential($clientId, $clientSecret));
-        $this->apiContext->setConfig(['mode' => $mode]);
+        $this->apiContext->setConfig([
+            'mode' => $mode
+        ]);
     }
 
-    public function createPayment(float $amount, string $currency, string $description, string $returnUrl, string $cancelUrl): Payment
+    public function createPayment(CreatePaymentRequest $createPaymentRequest): Payment
     {
         $payer = new Payer();
         $payer->setPaymentMethod(self::PAYMENT_METHOD);
+        $totalPrice = $createPaymentRequest->getShoppingCart()->getTotalPrice();
 
-        $amount = $this->generateAmountByTotalAndCurrency($amount, $currency);
+        $amount = $this->generateAmountByTotalAndCurrency($totalPrice, $createPaymentRequest->getCurrency());
 
-        $transaction = $this->createTransactionWith($amount, $description);
+        $transaction = $this->createTransactionWith($amount, $createPaymentRequest->getDescription());
 
-        $payment = $this->generatePaymentBy($payer, $transaction, $returnUrl, $cancelUrl);
+        $payment = $this->generatePaymentBy($payer, $transaction, $createPaymentRequest->getReturnUrl(), $createPaymentRequest->getCancelUrl());
 
         try {
+//            dump($this->apiContext);die;
             $payment->create($this->apiContext);
         } catch (\Exception $e) {
             throw new PaymentProgressWrongException($e->getMessage());
@@ -61,11 +64,11 @@ class PaypalPaymentGatewayService
         return $result;
     }
 
-    private function generateAmountByTotalAndCurrency(float $amount, string $currency): Amount
+    private function generateAmountByTotalAndCurrency(float $totalPrice, string $currency): Amount
     {
         $amount = new Amount();
         $amount->setCurrency($currency);
-        $amount->setTotal($amount);
+        $amount->setTotal($totalPrice);
         return $amount;
     }
 

@@ -14,6 +14,7 @@ class Order
     private ?\DateTime $deliveredDate = null;
     private OrderAddress $address;
     private string $orderStatus;
+    private ?int $paymentId = null;
     public const STATUS_WAITING_PAYMENT = 'waiting_payment';
     public const STATUS_PAYMENT_CONFIRMED = 'payment_confirmed';
 

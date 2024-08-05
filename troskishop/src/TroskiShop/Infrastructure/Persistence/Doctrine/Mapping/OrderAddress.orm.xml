@@ -4,15 +4,15 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <embeddable name="TroskiShop\Domain\Model\OrderAddress">
-        <field name="country" column="address_country"/>
-        <field name="city" column="address_city"/>
-        <field name="location" column="address_location"/>
-        <field name="street" column="address_street"/>
-        <field name="number" column="address_number"/>
-        <field name="stair" column="address_stair"/>
-        <field name="floorNumber" column="address_floor_number"/>
-        <field name="door" column="address_door"/>
-        <field name="postalCode" column="address_postal_code"/>
-        <field name="phoneContact" column="address_phone_contact"/>
+        <field name="country" type="string" column="country"/>
+        <field name="city" type="string" column="city"/>
+        <field name="location" type="string" column="location"/>
+        <field name="street" type="string" column="street"/>
+        <field name="number" type="string" column="number"/>
+        <field name="stair" type="string" column="stair"/>
+        <field name="floorNumber" type="string" column="floor_number"/>
+        <field name="door" type="string" column="door"/>
+        <field name="postalCode" type="string" column="postal_code"/>
+        <field name="phoneContact" type="string" column="phone_contact"/>
     </embeddable>
 </doctrine-mapping>

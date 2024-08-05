@@ -21,6 +21,7 @@ class OrderAddress
                                 string $number,
                                 string $stair,
                                 string $floorNumber,
+                                string $door,
                                 string $postalCode,
                                 string $phoneContact)
     {
@@ -31,6 +32,7 @@ class OrderAddress
         $this->number = $number;
         $this->stair = $stair;
         $this->floorNumber = $floorNumber;
+        $this->door = $door;
         $this->postalCode = $postalCode;
         $this->phoneContact = $phoneContact;
     }

@@ -4,15 +4,25 @@
         xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
         https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="TroskiShop\Domain\Model\Order" table="ORDER">
-        <id name="id" type="string" column="id"/>
-        <one-to-one field="shoppingCart" target-entity="TroskiShop\Domain\Model\ShoppingCart"/>
-        <one-to-one field="delivery" target-entity="TroskiShop\Domain\Model\Delivery"/>
+    <entity name="TroskiShop\Domain\Model\Order"
+            table="SHOP_ORDER"
+            repository-class="TroskiShop\Infrastructure\Domain\Repository\DoctrineOrderRepository"
+    >
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+        <one-to-one field="shoppingCart" target-entity="TroskiShop\Domain\Model\ShoppingCart">
+            <join-column name="shopping_cart_id" referenced-column-name="id"/>
+        </one-to-one>
+        <one-to-one field="delivery" target-entity="TroskiShop\Domain\Model\Delivery">
+            <join-column name="delivery_id" referenced-column-name="id" nullable="true"/>
+        </one-to-one>
         <field name="createdAt" type="datetime" column="created_at"/>
-        <field name="sendingDate" type="datetime" column="sending_date"/>
-        <field name="deliveryDate" type="datetime" column="delivery_date"/>
-        <field name="deliveredDate" type="datetime" column="delivered_date"/>
-
-        <embedded name="address" class="TroskiShop\Domain\Model\OrderAddress"/>
+        <field name="sendingDate" type="datetime" column="sending_date" nullable="true"/>
+        <field name="deliveryDate" type="datetime" column="delivery_date" nullable="true"/>
+        <field name="deliveredDate" type="datetime" column="delivered_date" nullable="true"/>
+        <field name="paymentId" type="integer" column="paymentId" nullable="true"/>
+        <field name="orderStatus" type="string" column="orderStatus" nullable="false"/>
+        <embedded name="address" class="TroskiShop\Domain\Model\OrderAddress" use-column-prefix="false"/>
     </entity>
 </doctrine-mapping>
