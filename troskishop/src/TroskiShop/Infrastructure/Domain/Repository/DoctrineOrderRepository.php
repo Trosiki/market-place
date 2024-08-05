@@ -56,9 +56,32 @@ class DoctrineOrderRepository extends ServiceEntityRepository implements OrderRe
             ->addSelect('sc','sc','scp','p')
             ->where('sc.user = :user')
             ->setParameter('user', $user)
-            ->andWhere('o.id < :orderId')
+            ->andWhere('o.id = :orderId')
             ->setParameter('orderId', $orderId)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function ofUserAndOrderStatus(User $user, string $orderStatus): Order
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.shoppingCart','sc')
+            ->leftJoin('sc.products','scp')
+            ->leftJoin('scp.product','p')
+            ->addSelect('sc','sc','scp','p')
+            ->where('sc.user = :user')
+            ->setParameter('user', $user)
+            ->andWhere('o.orderStatus < :orderStatus')
+            ->setParameter('orderStatus', $orderStatus)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function remove(Order $order, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($order);
+        if($flush) {
+            $this->getEntityManager()->flush();
+        }
     }
 }

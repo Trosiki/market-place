@@ -15,8 +15,8 @@ class Order
     private OrderAddress $address;
     private string $orderStatus;
     private ?int $paymentId = null;
-    public const STATUS_WAITING_PAYMENT = 'waiting_payment';
-    public const STATUS_PAYMENT_CONFIRMED = 'payment_confirmed';
+    public const STATUS_WAITING_PAYMENT = 'Pago en progreso';
+    public const STATUS_PAYMENT_CONFIRMED = 'Confirmado';
 
     public function __construct(ShoppingCart $shoppingCart, OrderAddress $address, string $orderStatus = self::STATUS_WAITING_PAYMENT)
     {
@@ -128,6 +128,16 @@ class Order
     public function setOrderStatus(string $orderStatus): void
     {
         $this->orderStatus = $orderStatus;
+    }
+
+    public function getPaymentId(): ?int
+    {
+        return $this->paymentId;
+    }
+
+    public function setPaymentId(?int $paymentId): void
+    {
+        $this->paymentId = $paymentId;
     }
 
 }
