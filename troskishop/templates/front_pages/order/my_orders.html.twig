@@ -1,0 +1,16 @@
+{% set active_page = 'my_orders' %}
+{% set active_filters = false %}
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mb-4">Historial de Pedidos</h1>
+        {% include 'front_pages/order/order-row.html.twig' %}
+        <div class="d-flex col-12 justify-content-center htmx-indicator" id="loader-orders">
+            <div class="spinner-border hx-indicator" role="status">
+                <span class="sr-only">Cargando...</span>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

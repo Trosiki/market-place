@@ -5,7 +5,6 @@
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/troskishop/src/TroskiShop" isTestSource="false" packagePrefix="TroskiShop\" />
-      <sourceFolder url="file://$MODULE_DIR$/troskishop/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/troskishop/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/troskishop/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/troskishop/vendor/doctrine/cache" />

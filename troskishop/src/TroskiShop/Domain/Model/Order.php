@@ -60,7 +60,7 @@ class Order
         $this->deliveryId = $deliveryId;
     }
 
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
@@ -70,7 +70,7 @@ class Order
         $this->createdAt = $createdAt;
     }
 
-    public function getSendingDate(): \DateTime
+    public function getSendingDate(): ?\DateTime
     {
         return $this->sendingDate;
     }
@@ -80,7 +80,7 @@ class Order
         $this->sendingDate = $sendingDate;
     }
 
-    public function getDeliveryDate(): \DateTime
+    public function getDeliveryDate(): ?\DateTime
     {
         return $this->deliveryDate;
     }
@@ -90,7 +90,7 @@ class Order
         $this->deliveryDate = $deliveryDate;
     }
 
-    public function getDeliveredDate(): \DateTime
+    public function getDeliveredDate(): ?\DateTime
     {
         return $this->deliveredDate;
     }

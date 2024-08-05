@@ -22,7 +22,6 @@ class DoctrineProductRepository extends ServiceEntityRepository implements Produ
         $queryBuilder = $this->createQueryBuilder('p');
         $this->configureFiltersInQueryBuilderFromProductsFilter($queryBuilder, $productsFilterDto);
         return $queryBuilder->getQuery()->getResult();
-
     }
 
     public function findByUri(string $uri): Product
