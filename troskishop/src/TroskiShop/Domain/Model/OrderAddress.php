@@ -14,8 +14,27 @@ class OrderAddress
     private string $postalCode;
     private string $phoneContact;
 
-    public function __construct()
+    public function __construct(string $country,
+                                string $city,
+                                string $location,
+                                string $street,
+                                string $number,
+                                string $stair,
+                                string $floorNumber,
+                                string $door,
+                                string $postalCode,
+                                string $phoneContact)
     {
+        $this->country = $country;
+        $this->city = $city;
+        $this->location = $location;
+        $this->street = $street;
+        $this->number = $number;
+        $this->stair = $stair;
+        $this->floorNumber = $floorNumber;
+        $this->door = $door;
+        $this->postalCode = $postalCode;
+        $this->phoneContact = $phoneContact;
     }
 
     public function getCountry(): string

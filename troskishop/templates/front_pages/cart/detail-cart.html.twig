@@ -12,7 +12,7 @@
         <div class="cart-total">
             Total: {{ app.user.appUser.activeShoppingCart.totalPrice }}€
         </div>
-        <button class="btn btn-checkout mt-4">Proceder al Pago <i class="fas fa-credit-card"></i></button>
+        <a href="{{ path('order_address_before_payment') }}" class="btn btn-checkout mt-4">Proceder al Pago <i class="fas fa-credit-card"></i></a>
     </div>
 </div>
 {% endblock body %}

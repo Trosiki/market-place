@@ -28,3 +28,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    TroskiShop\Infrastructure\Domain\Services\PaypalPaymentGatewayService:
+        arguments:
+            $clientId: '%env(PAYPAL_CLIENT_ID)%'
+            $clientSecret: '%env(PAYPAL_CLIENT_SECRET)%'
+            $mode: '%env(PAYPAL_MODE)%'
+

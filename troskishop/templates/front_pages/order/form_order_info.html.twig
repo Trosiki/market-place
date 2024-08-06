@@ -1,0 +1,93 @@
+{% set active_page = 'cart' %}
+{% set active_filters = false %}
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="row col-12 justify-content-center">
+        <div class="col-md-8">
+            <div class="m-5">
+                <div class="card-header">
+                    <h3>Formulario de Pago</h3>
+                </div>
+                <div class="card-body">
+                    <div class="summary">
+                        <h5>Resumen del carrito</h5>
+                        {% for shoppingCartProduct in app.user.appUser.activeShoppingCart.products %}
+                        <div class="item">
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid" src="{{ shoppingCartProduct.product.image }}" alt="{{ shoppingCartProduct.product.name }}">
+                                <span>Producto: {{ shoppingCartProduct.product.name }}</span>
+                            </div>
+                            <span>Cantidad: {{ shoppingCartProduct.quantity }}</span>
+                            <span>Precio por unidad: {{ shoppingCartProduct.product.price }}</span>
+                            <span>Precio total: {{ shoppingCartProduct.totalPrice }}</span>
+                        </div>
+                        {% endfor %}
+                        <div class="text-end">
+                            <span><strong>Precio total:</strong></span>
+                            <span><strong>{{ app.user.appUser.activeShoppingCart.totalPrice }}</strong></span>
+                        </div>
+                    </div>
+
+                    <form action="{{ path('payment_create') }}" method="POST">
+                        <div class="mb-3">
+                            <label for="country" class="form-label">País</label>
+                            <select class="form-select" id="country" name="addressCountry" required>
+                                <option selected disabled value="">Selecciona un país</option>
+                                <option value="España">España</option>
+                                <option value="México">México</option>
+                                <option value="Argentina">Argentina</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">Ciudad *</label>
+                            <input type="text" class="form-control" id="city" name="addressCity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Localidad *</label>
+                            <input type="text" class="form-control" id="location" name="addressLocation" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="street" class="form-label">Calle *</label>
+                            <input type="text" class="form-control" id="street" name="addressStreet" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="number" class="form-label">Número *</label>
+                                <input type="text" class="form-control" id="number" name="addressNumber" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="stair" class="form-label">Escalera</label>
+                                <input type="text" class="form-control" id="stair" name="addressStair">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="floorNumber" class="form-label">Piso</label>
+                                <input type="text" class="form-control" id="floorNumber" name="addressFloorNumber">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="door" class="form-label">Puerta *</label>
+                            <input type="text" class="form-control" id="door" name="addressDoor" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postalCode" class="form-label">Código Postal *</label>
+                            <input type="text" class="form-control" id="postalCode" name="addressZipCode" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneContact" class="form-label">Teléfono de Contacto *</label>
+                            <input type="tel" class="form-control" id="phoneContact" name="addressContactPhone" required>
+                        </div>
+                        <div class="form-check mb-3 text-start">
+                            <input class="form-check-input" type="checkbox" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                * He leído y acepto las <a href="#" target="_blank">condiciones de uso</a>
+                            </label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-custom">Pagar con Paypal <i class="fas fa-credit-card"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

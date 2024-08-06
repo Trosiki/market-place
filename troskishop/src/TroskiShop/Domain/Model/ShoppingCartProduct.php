@@ -58,4 +58,9 @@ class ShoppingCartProduct
     {
         return $this->product->getPrice() * $this->quantity;
     }
+
+    public function getResume(): string
+    {
+        return $this->getQuantity() . " x " . $this->product->getName();
+    }
 }
