@@ -10,6 +10,6 @@ interface OrderRepositoryInterface
     public function save(Order $order, bool $flush = false): void;
     public function getOrdersBeforeIdOfuser(User $user, ?int $orderId = null): array;
     public function ofUserAndId(User $user, int $orderId): Order;
-    public function ofUserAndOrderStatus(User $user, string $orderStatus): Order;
+    public function ofUserAndOrderStatus(User $user, string $orderStatus): ?Order;
     public function remove(Order $order, bool $flush = false): void;
 }

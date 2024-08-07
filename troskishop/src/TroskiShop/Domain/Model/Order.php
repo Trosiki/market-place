@@ -14,7 +14,7 @@ class Order
     private ?\DateTime $deliveredDate = null;
     private OrderAddress $address;
     private string $orderStatus;
-    private ?int $paymentId = null;
+    private ?string $paymentId = null;
     public const STATUS_WAITING_PAYMENT = 'Pago en progreso';
     public const STATUS_PAYMENT_CONFIRMED = 'Confirmado';
 
@@ -130,12 +130,12 @@ class Order
         $this->orderStatus = $orderStatus;
     }
 
-    public function getPaymentId(): ?int
+    public function getPaymentId(): ?string
     {
         return $this->paymentId;
     }
 
-    public function setPaymentId(?int $paymentId): void
+    public function setPaymentId(?string $paymentId): void
     {
         $this->paymentId = $paymentId;
     }

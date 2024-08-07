@@ -62,7 +62,7 @@ class DoctrineOrderRepository extends ServiceEntityRepository implements OrderRe
             ->getOneOrNullResult();
     }
 
-    public function ofUserAndOrderStatus(User $user, string $orderStatus): Order
+    public function ofUserAndOrderStatus(User $user, string $orderStatus): ?Order
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.shoppingCart','sc')
@@ -71,7 +71,7 @@ class DoctrineOrderRepository extends ServiceEntityRepository implements OrderRe
             ->addSelect('sc','sc','scp','p')
             ->where('sc.user = :user')
             ->setParameter('user', $user)
-            ->andWhere('o.orderStatus < :orderStatus')
+            ->andWhere('o.orderStatus = :orderStatus')
             ->setParameter('orderStatus', $orderStatus)
             ->getQuery()
             ->getOneOrNullResult();

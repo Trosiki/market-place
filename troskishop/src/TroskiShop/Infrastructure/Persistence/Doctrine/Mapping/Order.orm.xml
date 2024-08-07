@@ -21,7 +21,7 @@
         <field name="sendingDate" type="datetime" column="sending_date" nullable="true"/>
         <field name="deliveryDate" type="datetime" column="delivery_date" nullable="true"/>
         <field name="deliveredDate" type="datetime" column="delivered_date" nullable="true"/>
-        <field name="paymentId" type="integer" column="paymentId" nullable="true"/>
+        <field name="paymentId" type="string" column="paymentId" nullable="true"/>
         <field name="orderStatus" type="string" column="orderStatus" nullable="false"/>
         <embedded name="address" class="TroskiShop\Domain\Model\OrderAddress" use-column-prefix="false"/>
     </entity>
