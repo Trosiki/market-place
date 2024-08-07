@@ -18,7 +18,7 @@
     RewriteRule \.(css|js|jpg|jpeg|png|gif)$ - [L]
 
     # Permitir acceso a los elementos estáticos en la carpeta 'public'
-    RewriteCond %{REQUEST_URI} !^/backend/public/
+    RewriteCond %{REQUEST_URI} !^/troskishop/public/
     RewriteRule ^(.*)$ troskishop/public/$1 [L]
 
     # Redirigir todas las solicitudes al controlador frontal de Symfony
