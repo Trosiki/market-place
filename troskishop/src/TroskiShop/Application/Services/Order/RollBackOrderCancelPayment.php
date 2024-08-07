@@ -24,7 +24,7 @@ class RollBackOrderCancelPayment
 
         $order->getShoppingCart()->setCartStatus(ShoppingCart::STATUS_ACTIVE);
         $this->shoppingCartRepository->save($order->getShoppingCart());
-        $this->orderRepository->save($order, true);
+        $this->orderRepository->remove($order, true);
 
         return $order;
     }
