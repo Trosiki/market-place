@@ -4,20 +4,20 @@ easy_admin:
       Product:
         class: TroskiShop\Domain\Model\Product
         list:
-          fields: ['id','name','price']
+          fields: ['id','name', 'brand', 'model', 'uri', 'price']
         form:
-          fields: [ 'name', 'description', 'price', 'image', 'specification' ]
+          fields: [ 'name', 'brand', 'model','description', 'price', 'image', 'specification', 'uri' ,'active']
       Order:
         class: TroskiShop\Domain\Model\Order
         list:
-          fields: [ 'id', 'shoppingCartId', 'address' ,'createdAt', 'sendingDate', 'deliveryDate', 'deliveredDate' ]
+          fields: [ 'id', 'createdAt', 'sendingDate', 'deliveryDate', 'deliveredDate' ]
       User:
         class: TroskiShop\Domain\Model\User
         list:
-          fields: ['id', 'nif', 'name', 'surname', 'email']
+          fields: ['id', 'nif', 'name', 'surname', 'email', 'telephone']
   design:
     form_theme: '@EasyAdmin/crud/form_theme.html.twig'
     menu:
-      - {route: 'backoffice', label: 'Dashboard', icon: 'fa fa-home'}
+      - {route: 'dashboard', label: 'Dashboard', icon: 'fa fa-home'}
   dashboard:
     controller: TroskiShop\Infrastructure\Framework\Symfony\Controller\Backoffice\BackofficeController

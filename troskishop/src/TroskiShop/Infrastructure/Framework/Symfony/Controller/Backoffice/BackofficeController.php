@@ -15,7 +15,7 @@ use TroskiShop\Domain\Model\User;
 
 class BackofficeController extends AbstractDashboardController
 {
-    #[Route('/backoffice', name: 'backoffice')]
+    #[Route('/dashboard', name: 'dashboard')]
     public function index(): Response
     {
 
@@ -39,7 +39,7 @@ class BackofficeController extends AbstractDashboardController
         // return $this->render('some/path/my-dashboard.html.twig');
     }
 
-    #[Route('/backoffice/login', name: 'login_backend')]
+    #[Route('/login', name: 'login_backend')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -118,36 +118,22 @@ class BackofficeController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Product', 'fa fa-home', Product::class);
-        yield MenuItem::linkToCrud('Order', 'fa fa-home', Order::class);
+        yield MenuItem::linkToCrud('Product', 'fa fa-cart', Product::class);
+        yield MenuItem::linkToCrud('Order', 'fa fa-dollar', Order::class);
         yield MenuItem::linkToCrud('User', 'fa fa-user', User::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
     public function configureUserMenu(UserInterface $user): \EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu
     {
-        // Usually it's better to call the parent method because that gives you a
-        // user menu with some menu items already created ("sign out", "exit impersonation", etc.)
-        // if you prefer to create the user menu from scratch, use: return UserMenu::new()->...
         return parent::configureUserMenu($user)
-            // use the given $user object to get the user name
-            ->setName($user->getFullName())
-            // use this method if you don't want to display the name of the user
+            ->setName($user->getName())
             ->displayUserName(false)
-
-            // you can return an URL with the avatar image
             ->setAvatarUrl('https://...')
-            ->setAvatarUrl($user->getProfileImageUrl())
-            // use this method if you don't want to display the user image
             ->displayUserAvatar(false)
-            // you can also pass an email address to use gravatar's service
-            ->setGravatarEmail($user->getMainEmailAddress())
-
-            // you can use any type of menu item, except submenus
+            ->setGravatarEmail($user->getEmail())
             ->addMenuItems([
-                MenuItem::linkToRoute('My Profile', 'fa fa-id-card', '...', ['...' => '...']),
-                MenuItem::linkToRoute('Settings', 'fa fa-user-cog', '...', ['...' => '...']),
-                MenuItem::section(),
+                MenuItem::linkToRoute('Mi perfil', 'fa fa-id-card', '...', ['...' => '...']),
                 MenuItem::linkToLogout('Logout', 'fa fa-sign-out'),
             ]);
     }

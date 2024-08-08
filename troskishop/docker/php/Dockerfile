@@ -13,10 +13,16 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libcurl4-openssl-dev \
     unzip \
+    git \
+    unzip \
+    wait-for-it \
+    wget \
+    libicu-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install pdo pdo_mysql \
-    && docker-php-ext-install curl
+    && docker-php-ext-install curl \
+    && docker-php-ext-install intl pdo_mysql
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
