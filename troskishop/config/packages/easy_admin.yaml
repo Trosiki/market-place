@@ -3,10 +3,9 @@ easy_admin:
   entities:
       Product:
         class: TroskiShop\Domain\Model\Product
+        label: "No funciona"
         list:
           fields: ['id','name', 'brand', 'model', 'uri', 'price']
-        form:
-          fields: [ 'name', 'brand', 'model','description', 'price', 'image', 'specification', 'uri' ,'active']
       Order:
         class: TroskiShop\Domain\Model\Order
         list:
