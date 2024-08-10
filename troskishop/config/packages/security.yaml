@@ -12,7 +12,23 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        backoffice:
+            pattern: ^/backoffice
+            lazy: true
+            provider: user
+            form_login:
+                login_path: login_backend
+                check_path: login_backend
+                default_target_path: /backoffice/dashboard
+                always_use_default_target_path: true
+            logout:
+                path: app_logout
+                target: /backoffice/login
+            entry_point: form_login
+
         main:
+            pattern: ^/
             lazy: true
             provider: user
             form_login:
@@ -24,6 +40,8 @@ security:
                 path: app_logout
                 target: /
             entry_point: form_login
+
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -33,7 +51,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-#         - { path: ^/backoffice, roles: ROLE_ADMIN }
+         - { path: ^/backoffice/login, roles: PUBLIC_ACCESS,  }
+         - { path: ^/backoffice, roles: ROLE_ADMIN,  }
          - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:

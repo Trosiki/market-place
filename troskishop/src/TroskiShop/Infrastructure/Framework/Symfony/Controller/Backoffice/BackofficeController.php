@@ -12,6 +12,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use TroskiShop\Domain\Model\Order;
 use TroskiShop\Domain\Model\Product;
 use TroskiShop\Domain\Model\User;
+use TroskiShop\Infrastructure\Framework\Symfony\Security\SecurityUser;
 
 class BackofficeController extends AbstractDashboardController
 {
@@ -62,49 +63,24 @@ class BackofficeController extends AbstractDashboardController
             // the title visible above the login form (define this option only if you are
             // rendering the login template in a regular Symfony controller; when rendering
             // it from an EasyAdmin Dashboard this is automatically set as the Dashboard title)
-            'page_title' => 'ACME login',
+            'page_title' => 'TroskiShop Back',
 
             // the string used to generate the CSRF token. If you don't define
             // this parameter, the login form won't include a CSRF token
             'csrf_token_intention' => 'authenticate',
-
             // the URL users are redirected to after the login (default: '/admin')
-            'target_path' => $this->generateUrl('backoffice'),
+            'target_path' => $this->generateUrl('dashboard'),
 
-            // the label displayed for the username form field (the |trans filter is applied to it)
-            'username_label' => 'Your username',
-
-            // the label displayed for the password form field (the |trans filter is applied to it)
-            'password_label' => 'Your password',
-
-            // the label displayed for the Sign In form button (the |trans filter is applied to it)
+            'username_label' => 'Usuario',
+            'password_label' => 'Contraseña',
             'sign_in_label' => 'Log in',
-
-            // the 'name' HTML attribute of the <input> used for the username field (default: '_username')
-            'username_parameter' => 'my_custom_username_field',
-
-            // the 'name' HTML attribute of the <input> used for the password field (default: '_password')
-            'password_parameter' => 'my_custom_password_field',
-
-            // whether to enable or not the "forgot password?" link (default: false)
-            'forgot_password_enabled' => true,
-
-            // the path (i.e. a relative or absolute URL) to visit when clicking the "forgot password?" link (default: '#')
-
-            // the label displayed for the "forgot password?" link (the |trans filter is applied to it)
-            'forgot_password_label' => 'Forgot your password?',
-
-            // whether to enable or not the "remember me" checkbox (default: false)
+            'username_parameter' => '_username',
+            'password_parameter' => '_password',
+            'forgot_password_enabled' => false,
             'remember_me_enabled' => true,
-
-            // remember me name form field (default: '_remember_me')
-            'remember_me_parameter' => 'custom_remember_me_param',
-
-            // whether to check by default the "remember me" checkbox (default: false)
+            'remember_me_parameter' => '_remember_me',
             'remember_me_checked' => true,
-
-            // the label displayed for the remember me checkbox (the |trans filter is applied to it)
-            'remember_me_label' => 'Remember me',
+            'remember_me_label' => 'Recuérdame',
         ]);
 
     }
@@ -126,12 +102,13 @@ class BackofficeController extends AbstractDashboardController
 
     public function configureUserMenu(UserInterface $user): \EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu
     {
+        /** @var SecurityUser $user */
         return parent::configureUserMenu($user)
-            ->setName($user->getName())
+            ->setName($user->getAppUser()->getName())
             ->displayUserName(false)
             ->setAvatarUrl('https://...')
             ->displayUserAvatar(false)
-            ->setGravatarEmail($user->getEmail())
+            ->setGravatarEmail($user->getAppUser()->getEmail())
             ->addMenuItems([
                 MenuItem::linkToRoute('Mi perfil', 'fa fa-id-card', '...', ['...' => '...']),
                 MenuItem::linkToLogout('Logout', 'fa fa-sign-out'),
