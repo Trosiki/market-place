@@ -15,7 +15,7 @@
 
     # No aplicar más reglas si la solicitud apunta a un archivo existente
     RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule \.(css|js|jpg|jpeg|png|gif)$ - [L]
+    RewriteRule \.(css|js|jpg|jpeg|png|gif|webp)$ - [L]
 
     # Permitir acceso a los elementos estáticos en la carpeta 'public'
     RewriteCond %{REQUEST_URI} !^/troskishop/public/
@@ -23,6 +23,7 @@
 
     # Redirigir todas las solicitudes al controlador frontal de Symfony
     RewriteRule ^ %{ENV:BASE}/troskishop/public/index.php [L]
+    RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
