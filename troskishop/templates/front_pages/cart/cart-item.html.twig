@@ -1,5 +1,5 @@
 <div class="cart-item">
-    <img src="{{ asset(shoppingCartProduct.product.image) }}" alt="Producto 1">
+    <img src="{{ asset("images/product/" ~ shoppingCartProduct.product.image) }}" alt="Producto 1">
     <div class="cart-item-details">
         <h5>{{ shoppingCartProduct.product.name }}</h5>
         <p class="text-muted">{{ shoppingCartProduct.product.description }}</p>

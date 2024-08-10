@@ -5,7 +5,14 @@ easy_admin:
         class: TroskiShop\Domain\Model\Product
         label: "No funciona"
         list:
-          fields: ['id','name', 'brand', 'model', 'uri', 'price']
+          fields:
+            - 'id'
+            - {property: 'image', type: 'image', base_path: '%env(UPLOAD_PATH)%'}
+            - 'name'
+            - 'brand'
+            - 'model'
+            - 'uri'
+            - 'price'
       Order:
         class: TroskiShop\Domain\Model\Order
         list:

@@ -21,5 +21,7 @@
         <field name="model" type="string" column="model" length="255"/>
         <field name="specification" type="text" column="specification"/>
         <field name="active" type="boolean" column="active"/>
+        <field name="createdAt" type="date" column="createdAt"/>
+        <field name="updatedAt" type="date" column="updatedAt"/>
     </entity>
 </doctrine-mapping>

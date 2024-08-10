@@ -19,7 +19,7 @@
                     </div>
                     <div class="product-images">
                         {% for shoppingCartProduct in order.shoppingCart.products %}
-                            <img src="{{ shoppingCartProduct.product.image }}" alt="{{ shoppingCartProduct.product.name }}">
+                            <img src="{{ asset("images/product/" ~ shoppingCartProduct.product.image) }}" alt="{{ shoppingCartProduct.product.name }}">
                         {% endfor %}
                     </div>
                 </div>

@@ -2,7 +2,7 @@
     {% for shoppingCartProduct in app.user.appUser.activeShoppingCart.products %}
         <li>
             <div class="cart-preview-item">
-                <img src="{{ asset(shoppingCartProduct.product.image) }}" alt="Producto 1">
+                <img src="{{ asset("images/product/" ~ shoppingCartProduct.product.image) }}" alt="Producto 1">
                 <div class="cart-preview-item-details">
                     <h6>{{ shoppingCartProduct.product.name }}</h6>
                     <p class="cart-preview-item-price">{{ shoppingCartProduct.quantity }}x {{shoppingCartProduct.product.price}}€= <strong>{{ shoppingCartProduct.totalPrice }} €</strong></p>

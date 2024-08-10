@@ -49,7 +49,7 @@
                     <h5>Resumen del Pedido</h5>
                     {% for shoppingCartProduct in order.shoppingCart.products %}
                         <div class="item">
-                            <span><img src="{{ asset(shoppingCartProduct.product.image) }}" alt="{{ shoppingCartProduct.product.name }}"></span>
+                            <span><img src="{{ asset("images/product/" ~ shoppingCartProduct.product.image) }}" alt="{{ shoppingCartProduct.product.name }}"></span>
                             <span>{{ shoppingCartProduct.product.name }}</span>
                             <span>Cantidad: {{ shoppingCartProduct.quantity }}</span>
                             <span>Precio por Unidad: {{ shoppingCartProduct.product.price }} €</span>

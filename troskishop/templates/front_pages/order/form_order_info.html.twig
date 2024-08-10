@@ -14,7 +14,7 @@
                         {% for shoppingCartProduct in app.user.appUser.activeShoppingCart.products %}
                         <div class="item">
                             <div class="d-flex align-items-center">
-                                <img class="img-fluid" src="{{ shoppingCartProduct.product.image }}" alt="{{ shoppingCartProduct.product.name }}">
+                                <img class="img-fluid" src="{{asset("images/product/" ~ shoppingCartProduct.product.image) }}" alt="{{ shoppingCartProduct.product.name }}">
                                 <span>Producto: {{ shoppingCartProduct.product.name }}</span>
                             </div>
                             <span>Cantidad: {{ shoppingCartProduct.quantity }}</span>

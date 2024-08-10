@@ -14,6 +14,8 @@ class Product
     private string $uri;
     private string $brand;
     private string $model;
+    private \DateTime $createdAt;
+    private \DateTime $updatedAt;
 
     public function __construct(string $name = "", string $description = "", float $price = 0,
                                 string $image = "", string $specification = "", string $category = "",
@@ -29,6 +31,8 @@ class Product
         $this->uri = $uri;
         $this->brand = $brand;
         $this->model = $model;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): int
@@ -139,6 +143,26 @@ class Product
     public function setModel(string $model): void
     {
         $this->model = $model;
+    }
+
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
 }
