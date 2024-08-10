@@ -113,6 +113,12 @@ body {
   padding: 3rem 10rem !important;
 }
 
+@media (min-width: 768px) {
+  .p-3-8 {
+    padding: 0 !important;
+  }
+}
+
 .product-detail {
   background-color: #fff;
   border-radius: 10px;
