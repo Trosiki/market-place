@@ -68,4 +68,5 @@ Las pantallas serán:
 * **Github con GitFlow:** Alojamiendo del proyecto y uso de GitFlow para el proyecto.
 * **Miro:** Para realizar diagramas y otros gráficos.
 * **Symfony 6.4:** Es actualmente la versión LTS del Framework.
-* **HTMX:** Será utilizado para facilitar el manejo de las 
+* **HTMX:** Será utilizado para facilitar el manejo de las plantillas, renderizados, filtros y otras funcionalidades.
+* **EasyAdmin Bundle:** Utilizado para facilitar el panel de gestión así como la creación ded productos de manera ágil.
