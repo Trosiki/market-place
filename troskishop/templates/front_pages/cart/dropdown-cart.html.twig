@@ -1,0 +1,12 @@
+{% if app.user.appUser.activeShoppingCart is defined and app.user.appUser.activeShoppingCart != false %}
+    {% set shoppingCartActiveExists = true %}
+{% else %}
+    {% set shoppingCartActiveExists = false %}
+{% endif %}
+<a class="nav-link dropdown-toggle" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="totalShoppingCartItems" class="badge bg-warning text-dark ms-1">{% if shoppingCartActiveExists %}{{ app.user.appUser.activeShoppingCart.totalProducts }}{% else %}0{% endif %}</span>
+</a>
+<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartDropdown">
+    {% include 'front_pages/cart/dropdown-cart-item.html.twig' with {shoppingCartActiveExists: shoppingCartActiveExists} %}
+</ul>

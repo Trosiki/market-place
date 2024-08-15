@@ -1,0 +1,75 @@
+{% set active_page = 'login' %}
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card-login mt-5 mb-5">
+                    <div class="card-header">
+                        <h3>Acceso a la Cuenta</h3>
+                    </div>
+                    <div class="row form-section">
+                        <div class="col-md-6 border-end">
+                            <h4 class="text-center">Iniciar Sesión</h4>
+                            {% if error %}
+                                <div class="alert alert-danger" id="error-msg">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+                            <form id="login-form" action="{{ path('app_login') }}" method="post">
+                                <div class="mb-3">
+                                    <label for="login-email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="login-email" name="_username" value="{{ last_username }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="login-password" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" name="_password" id="login-password" required>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-custom">Iniciar Sesión</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="text-center">Registrarse</h4>
+                            <form id="register-form" action="{{ path('register') }}" method="POST">
+                                <div class="mb-3">
+                                    <label for="register-name" class="form-label">DNI</label>
+                                    <input type="text" class="form-control" id="register-nif" name="nif" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="register-name" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="register-name" name="firstName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="register-name" class="form-label">Apellidos</label>
+                                    <input type="text" class="form-control" id="register-surname" name="lastName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="register-name" class="form-label">Teléfono</label>
+                                    <input type="text" class="form-control" id="register-telephone" name="telephone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="register-email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="register-email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="register-password" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="register-password" name="password" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="register-confirm-password" class="form-label">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" id="register-confirm-password" name="confirmPassword" required>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-custom">Registrarse</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        <p>&copy; 2024 TroskiShop</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

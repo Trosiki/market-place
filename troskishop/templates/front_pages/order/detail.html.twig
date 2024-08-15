@@ -1,0 +1,68 @@
+{% set active_page = '' %}
+{% set active_filters = '' %}
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center mb-4">Detalle del Pedido</h1>
+    <div class="order-detail-box">
+        <div class="order-detail-header">
+            <span>Pedido #{{ order.id }}</span>
+            <span>Estado: {{ order.orderStatus }}</span>
+        </div>
+        <div class="order-detail-body d-flex flex-wrap">
+            <div class="col-6">
+                <div class="info-section">
+                    <h5>Información del pedido</h5>
+                    <p><strong>Fecha de Realización:</strong> {{ order.createdAt | date('Y/m/d') }}</p>
+                </div>
+
+                <div class="info-section">
+                    <div class="timeline">
+                        <div class="timeline-event">
+                            <strong class="m-3">Fecha de Envío:</strong> {% if order.sendingDate is not null %}{{ order.sendingDate | date('Y/m/d') }}{% else %}-{% endif %}
+                        </div>
+                        <div class="timeline-event">
+                            <strong class="m-3">Fecha de Entrega Estimada:</strong> {% if order.deliveryDate is not null %}{{ order.deliveryDate | date('Y/m/d') }}{% else %}-{% endif %}
+                        </div>
+                        <div class="timeline-event">
+                            <strong class="m-3">Fecha de Entregado:</strong> {% if order.deliveredDate is not null %}{{ order.deliveredDate | date('Y/m/d') }}{% else %}-{% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section address-info">
+                    <h5>Dirección de Entrega</h5>
+                    <p><strong>País:</strong> {{ order.address.country }}</p>
+                    <p><strong>Ciudad:</strong> {{ order.address.city }}</p>
+                    <p><strong>Localidad:</strong> {{ order.address.location }}</p>
+                    <p><strong>Calle:</strong> {{ order.address.street }}</p>
+                    <p><strong>Número:</strong> {{ order.address.number }}</p>
+                    <p><strong>Escalera:</strong> {{ order.address.stair }}</p>
+                    <p><strong>Planta:</strong> {{ order.address.floorNumber }}</p>
+                    <p><strong>Puerta:</strong> {{ order.address.door }}</p>
+                    <p><strong>Código Postal:</strong> {{ order.address.postalCode }}</p>
+                    <p><strong>Teléfono de Contacto:</strong> {{ order.address.phoneContact }}</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="order-summary">
+                    <h5>Resumen del Pedido</h5>
+                    {% for shoppingCartProduct in order.shoppingCart.products %}
+                        <div class="item">
+                            <span><img src="{{ asset("images/product/" ~ shoppingCartProduct.product.image) }}" alt="{{ shoppingCartProduct.product.name }}"></span>
+                            <span>{{ shoppingCartProduct.product.name }}</span>
+                            <span>Cantidad: {{ shoppingCartProduct.quantity }}</span>
+                            <span>Precio por Unidad: {{ shoppingCartProduct.product.price }} €</span>
+                            <span>Total: {{ shoppingCartProduct.totalPrice }} €</span>
+                        </div>
+                    {% endfor %}
+                    <div class="item total">
+                        <span>Total del Pedido:</span>
+                        <span>{{ order.shoppingCart.totalPrice }} €</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

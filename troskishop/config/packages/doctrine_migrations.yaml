@@ -1,0 +1,4 @@
+doctrine_migrations:
+    migrations_paths:
+        'TroskiShop\Infrastructure\Persistence\Doctrine\Migrations': '%kernel.project_dir%/src/TroskiShop/Infrastructure/Persistence/Doctrine/Migrations'
+

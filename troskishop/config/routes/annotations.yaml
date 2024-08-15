@@ -1,0 +1,3 @@
+controllers:
+  resource: '../../src/TroskiShop/Infrastructure/Framework/Symfony/Controller'
+  type: attribute

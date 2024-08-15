@@ -1,0 +1,39 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Establecer la base para las rutas
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+
+    # Manejar la autorización HTTP
+    RewriteCond %{HTTP:Authorization} .+
+    RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redireccionar a index.php
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=301,L]
+
+    # No aplicar más reglas si la solicitud apunta a un archivo existente
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule \.(css|js|jpg|jpeg|png|gif|webp)$ - [L]
+
+    # Permitir acceso a los elementos estáticos en la carpeta 'public'
+    RewriteCond %{REQUEST_URI} !^/troskishop/public/
+    RewriteRule ^(.*)$ troskishop/public/$1 [L]
+
+    # Redirigir todas las solicitudes al controlador frontal de Symfony
+    RewriteRule ^ %{ENV:BASE}/troskishop/public/index.php [L]
+    RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    <IfModule mod_alias.c>
+        RedirectMatch 302 ^/$ /index.php/
+    </IfModule>
+</IfModule>
+
+<IfModule mod_php8.c>
+    php_flag log_errors on
+    php_flag display_errors off
+    php_value error_log %{ENV:BASE}/troskishop/var/log/apache_errors.log
+</IfModule>

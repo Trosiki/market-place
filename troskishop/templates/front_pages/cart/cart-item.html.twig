@@ -1,0 +1,18 @@
+<div class="cart-item">
+    <img src="{{ asset("images/product/" ~ shoppingCartProduct.product.image) }}" alt="Producto 1">
+    <div class="cart-item-details">
+        <h5>{{ shoppingCartProduct.product.name }}</h5>
+        <p class="text-muted">{{ shoppingCartProduct.product.description }}</p>
+    </div>
+    <div class="cart-item-price">{{ shoppingCartProduct.product.price }} €</div>
+    <div class="cart-item-quantity">{{ shoppingCartProduct.quantity }}</div>
+    <div class="cart-item-total">{{ shoppingCartProduct.totalPrice }} €</div>
+    <div class="cart-item-remove">
+        <form action="{{ path('remove_of_shoppingcart') }}" method="POST">
+            <input type="hidden" name="uri" value="{{ shoppingCartProduct.product.uri }}">
+            <button type="submit" class="btn btn-outline-danger">
+                <i class="fas fa-trash"></i>
+            </button>
+        </form>
+    </div>
+</div>

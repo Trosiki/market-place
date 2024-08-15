@@ -1,0 +1,8 @@
+controllers:
+    resource: '../src/TroskiShop/Infrastructure/Framework/Symfony/Controller'
+    type: attribute
+
+backoffice:
+    resource: '../src/TroskiShop/Infrastructure/Framework/Symfony/Controller/Backoffice'
+    type: attribute
+    prefix: /backoffice
